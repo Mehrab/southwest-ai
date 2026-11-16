@@ -106,10 +106,10 @@ a{color:var(--teal)}
   <li><b>Gemini:</b> open <a href="https://gemini.google.com">gemini.google.com</a> with your Google account.</li>
 </ul>
 <div class="card mint">
-  <p><b>Today's input: the PhoneHub dashboard.</b> PhoneHub is the phone store from the Session 5 demo. Download its dashboard now: two pages of charts, tables, Fact and Guess notes, and two next steps. Made your own PhoneHub dashboard in Session 5? You can use yours instead.</p>
-  <a class="dl" href="files/phonehub_dashboard.pdf" download>PhoneHub dashboard (.pdf)</a>
+  <p><b>Today's input: your Corner Café dashboard from Session 5.</b> Have it ready as a PDF. No dashboard, or missed Session 5? Download the sample: two pages of charts, tables, Fact and Guess notes, and two next steps.</p>
+  <a class="dl" href="files/corner_cafe_dashboard.pdf" download>Sample Corner Café dashboard (.pdf)</a>
 </div>
-<p class="lede">The demos use Corner Café. Your turn uses PhoneHub. Both businesses and every number are made up for class, as in Session 5.</p>
+<p class="lede">Everything today uses Corner Café. The business and every number are made up for class, as in Session 5.</p>
 </section>
 
 <section id="why">
@@ -130,7 +130,7 @@ a{color:var(--teal)}
 </div>
 
 <div class="quiz" id="q-jobs">
-  <h3>Match the deck to its job</h3><p class="qi">Tap the job each Corner Café deck does. (Corner Café is today's demo business.)</p>
+  <h3>Match the deck to its job</h3><p class="qi">Tap the job each Corner Café deck does. (Corner Café is today's business.)</p>
   <ol><li data-a="Report"><p>Maya's monthly sales numbers for the café owners' meeting</p><div class="opts"><button type="button" class="opt">Ask</button><button type="button" class="opt">Teach</button><button type="button" class="opt">Report</button><button type="button" class="opt">Plan</button><button type="button" class="opt">Rally</button></div><p class="fb" hidden data-why="It shows where things stand."></p></li><li data-a="Ask"><p>A request to buy a new espresso machine</p><div class="opts"><button type="button" class="opt">Ask</button><button type="button" class="opt">Teach</button><button type="button" class="opt">Report</button><button type="button" class="opt">Plan</button><button type="button" class="opt">Rally</button></div><p class="fb" hidden data-why="It needs a yes."></p></li><li data-a="Teach"><p>How to close the register, for new hires</p><div class="opts"><button type="button" class="opt">Ask</button><button type="button" class="opt">Teach</button><button type="button" class="opt">Report</button><button type="button" class="opt">Plan</button><button type="button" class="opt">Rally</button></div><p class="fb" hidden data-why="It builds a skill."></p></li><li data-a="Plan"><p>The holiday plan for both cafés</p><div class="opts"><button type="button" class="opt">Ask</button><button type="button" class="opt">Teach</button><button type="button" class="opt">Report</button><button type="button" class="opt">Plan</button><button type="button" class="opt">Rally</button></div><p class="fb" hidden data-why="It gets everyone on one plan. The demo deck is this one, with an ask at the end."></p></li><li data-a="Rally"><p>A coffee tasting night for the neighborhood</p><div class="opts"><button type="button" class="opt">Ask</button><button type="button" class="opt">Teach</button><button type="button" class="opt">Report</button><button type="button" class="opt">Plan</button><button type="button" class="opt">Rally</button></div><p class="fb" hidden data-why="It brings people together."></p></li></ol>
   <p class="score" aria-live="polite"></p>
 </div>
@@ -145,7 +145,7 @@ a{color:var(--teal)}
 
 <section id="outline">
 <h2><span class="n">3</span>Outline first</h2>
-<p class="lede"><b>Demo deck:</b> Maya, owner of Corner Café, presents the holiday plan to her two café leads.<br><b>Your deck:</b> Jordan, owner of PhoneHub, presents to the two store managers: what to restock, and whether to cap online discounts. 6 slides, ending with two 2-week tests.</p>
+<p class="lede"><b>Demo deck:</b> Maya, owner of Corner Café, presents the holiday plan to her two café leads.<br><b>Your deck:</b> the same deck, built from your dashboard: what to restock and promote, and whether online discounts are too deep. 6 slides, ending with two 2-week tests.</p>
 <div class="card"><p><b>The title test:</b> read only the titles. Could someone repeat the plan? A topic title (“Sales”) says nothing. A message title (“Whole bean coffee is half our sales”) says the point.</p></div>
 
 <div class="quiz" id="q-titles">
@@ -158,25 +158,25 @@ a{color:var(--teal)}
 
 <section id="build">
 <h2><span class="n">4</span>Build a simple deck with Claude</h2>
-<p class="lede">The demo builds Corner Café's deck from a short brief, with no file. You build PhoneHub's deck with the same steps, from its dashboard. Then compare: what does yours say that the demo deck couldn't?</p>
+<p class="lede">The demo builds Corner Café's deck from a short brief, with no file. You build the same deck with the same steps, from your dashboard. Then compare: what does yours say that the demo deck couldn't?</p>
 <h3>In the demo: a deck from a brief only</h3>
 <p>No attachment. Claude gets only these words, so every fact comes back as a [NEED]. Try it at home to see the difference.</p>
 <div class="prompt"><div class="ph"><span>Brief-only outline prompt (demo) <em>· Claude</em></span><button class="copy" type="button" data-for="p1">Copy</button></div><pre id="p1">You are helping Maya, owner of Corner Café, plan a short presentation.
 About us: two cafés (Austin and Nashville) and an online store. We sell coffee beans, brewing gear, mugs and subscriptions.
-Maya wants her two café leads to agree a holiday plan: what to promote, and whether our online discounts are too deep.
+Maya wants her two café leads to agree a holiday plan: what to restock and promote, and whether our online discounts are too deep.
 Make an OUTLINE ONLY for a 6-slide deck. For each slide, give a title that states the message as one full sentence, and 2 or 3 short points.
 The last slide must say what Maya needs from the café leads.
 Tone: plain and friendly.
 I have not given you any numbers. Do not invent any. Write [NEED: what is missing] wherever a number or fact should go.</pre></div>
-<h3>Your turn, step 1: the outline only, from the PhoneHub dashboard</h3>
-<ol class="steps"><li>Start a new chat in Claude.</li><li>Click <b>+</b> and attach the PhoneHub dashboard PDF.</li><li>Copy the prompt, paste it, send.</li></ol>
-<div class="prompt"><div class="ph"><span>Outline prompt <em>· Claude</em></span><button class="copy" type="button" data-for="p2">Copy</button></div><pre id="p2">You are helping Jordan, owner of PhoneHub, plan a short presentation.
-About us: two phone stores (Atlanta and Denver) and an online store.
-I attached our Session 5 dashboard (PDF). Read all of it first: the charts, tables, Fact and Guess notes, and the two next steps.
-Jordan wants the two store managers to agree what to restock, and whether to cap our online discounts.
+<h3>Your turn, step 1: the outline only, from your dashboard</h3>
+<ol class="steps"><li>Start a new chat in Claude.</li><li>Click <b>+</b> and attach your Corner Café dashboard PDF (or the sample).</li><li>Copy the prompt, paste it, send.</li></ol>
+<div class="prompt"><div class="ph"><span>Outline prompt <em>· Claude</em></span><button class="copy" type="button" data-for="p2">Copy</button></div><pre id="p2">You are helping Maya, owner of Corner Café, plan a short presentation.
+About us: two cafés (Austin and Nashville) and an online store. We sell coffee beans, brewing gear, mugs and subscriptions.
+I attached our Session 5 dashboard (PDF). Read all of it first: the charts, tables, Fact and Guess notes, and the next steps.
+Maya wants her two café leads to agree a holiday plan: what to restock and promote, and whether our online discounts are too deep.
 Make an OUTLINE ONLY for a 6-slide deck. For each slide, give a title that states the message as one full sentence, and 2 or 3 short points.
 Say which slide each dashboard chart belongs on.
-The last slide must say what Jordan needs from the store managers.
+The last slide must say what Maya needs from the café leads.
 Tone: plain and friendly.
 Use only numbers from my dashboard, and keep a Guess as a guess. If something is missing, write [NEED: what is missing] instead of guessing.</pre></div>
 <p>Run the title test. Fix at least one title by replying, for example: <i>“Move slide 5 before slide 4.”</i></p>
@@ -216,24 +216,24 @@ Create it as a PowerPoint (.pptx) file I can download.</pre></div>
 <h3>Stuck on how to ask? Let AI write the prompt</h3>
 <p>Say what you want in your own words. Read the prompt Claude writes, fix anything wrong, then paste it back. Works for any step below.</p>
 <div class="prompt"><div class="ph"><span>Write-my-prompt prompt <em>· Claude</em></span><button class="copy" type="button" data-for="p4">Copy</button></div><pre id="p4">Write me a clear prompt I can paste back here to change my deck.
-What I want: [say it in your own words, for example: a cleaner blue theme and bigger numbers on slide 2]
+What I want: [say it in your own words, for example: warmer café colors and bigger numbers on slide 2]
 Keep the prompt short.</pre></div>
 <h3>Step 1: add speaker notes</h3>
-<div class="prompt"><div class="ph"><span>Speaker notes <em>· Claude</em></span><button class="copy" type="button" data-for="p5">Copy</button></div><pre id="p5">Add speaker notes to every slide: 3 or 4 sentences Jordan would say out loud to the store managers.
+<div class="prompt"><div class="ph"><span>Speaker notes <em>· Claude</em></span><button class="copy" type="button" data-for="p5">Copy</button></div><pre id="p5">Add speaker notes to every slide: 3 or 4 sentences Maya would say out loud to her café leads.
 Plain and friendly. Use only numbers from my dashboard.
 Keep every slide's title and points the same.
 Give me a new version of the PowerPoint file.</pre></div>
-<p>Read the notes out loud. Change any line Jordan wouldn't say.</p>
+<p>Read the notes out loud. Change any line Maya wouldn't say.</p>
 <h3>Step 2: change the theme colors</h3>
 <div class="prompt"><div class="ph"><span>Theme colors <em>· Claude</em></span><button class="copy" type="button" data-for="p6">Copy</button></div><pre id="p6">Change the theme of my whole deck:
-a clean, modern look: navy, white and one bright blue accent, large clear titles.
+warm café colors (dark brown, cream and one orange accent), large clear titles.
 Keep every slide's words and speaker notes the same.
 Give me a new version of the PowerPoint file.</pre></div>
 <h3>Step 3: add a chart and an icon</h3>
 <p>Claude can't lift a chart out of a PDF, so it redraws one from the dashboard's numbers. You get a real chart you can edit in PowerPoint.</p>
-<div class="prompt"><div class="ph"><span>Chart and icon <em>· Claude</em></span><button class="copy" type="button" data-for="p7">Copy</button></div><pre id="p7">On the slide about what sells, add a bar chart of net sales by brand, highest to lowest.
+<div class="prompt"><div class="ph"><span>Chart and icon <em>· Claude</em></span><button class="copy" type="button" data-for="p7">Copy</button></div><pre id="p7">On the slide about what sells, add a bar chart of net sales by category, highest to lowest.
 Use the exact numbers in my dashboard. Label each bar with its number and start the bars at zero.
-On the title slide, add a simple phone icon.
+On the title slide, add a simple coffee cup icon.
 Keep all other slides the same.
 Give me a new version of the PowerPoint file.</pre></div>
 <p>Claude draws charts and simple icons. For a <b>photo</b>, use Google Slides: <b>Insert → Image → Search the web</b>.</p>
@@ -241,7 +241,7 @@ Give me a new version of the PowerPoint file.</pre></div>
 </section>
 
 <section id="check">
-<h2><span class="n">7</span>Check it before Jordan presents</h2>
+<h2><span class="n">7</span>Check it before Maya presents</h2>
 <p class="lede">Notes and charts can bring in new numbers. Check after you modify.</p>
 <div class="prompt"><div class="ph"><span>Check prompt <em>· Claude</em></span><button class="copy" type="button" data-for="p8">Copy</button></div><pre id="p8">List every number on the slides and in the speaker notes.
 Next to each one, say where in my dashboard it came from.
@@ -249,7 +249,7 @@ If it did not come from my dashboard, say so.</pre></div>
 <div class="card">
 <p><b>Five checks before you present</b></p>
 <ol class="tight">
-  <li><b>Facts:</b> every number matches the dashboard. (Apple: $56,293.)</li>
+  <li><b>Facts:</b> every number matches the dashboard. (Whole bean coffee: $2,858.55.)</li>
   <li><b>Gaps:</b> no [NEED] left on a slide.</li>
   <li><b>Story:</b> read only the titles. They tell the plan.</li>
   <li><b>Notes:</b> you'd say every line out loud.</li>
@@ -268,14 +268,14 @@ If it did not come from my dashboard, say so.</pre></div>
 </ol>
 <div class="prompt"><div class="ph"><span>Canvas prompt <em>· Gemini Canvas</em></span><button class="copy" type="button" data-for="p9">Copy</button></div><pre id="p9">Create a 6-slide presentation from this outline.
 Keep my slide titles exactly. Add speaker notes to each slide.
-Use a clean, simple style that fits the business.
+Use a warm, simple café style.
 Do not add any number that is not in my outline. Keep every [NEED] tag.
 
 [paste your fixed outline here]</pre></div>
 <h3>Finish in Google Slides</h3>
 <ol class="steps">
   <li><b>Theme:</b> Slide → Change theme. Every slide follows.</li>
-  <li><b>Photo:</b> Insert → Image → Search the web. Try “smartphone store” for the title slide.</li>
+  <li><b>Photo:</b> Insert → Image → Search the web. Try “coffee shop” for the title slide.</li>
   <li><b>Notes:</b> View → Show speaker notes. Missing? Paste them from Claude.</li>
   <li><b>Practice:</b> Slideshow → Presenter view. You see your notes; the room sees the slides.</li>
 </ol>
@@ -319,7 +319,7 @@ Do not add any number that is not in my outline. Keep every [NEED] tag.
 <details><summary>My speaker notes didn't come across to Google Slides</summary><p>View → Show speaker notes, then paste each slide's notes from Claude.</p></details>
 </section>
 
-<footer>Southwest AI · AI Made Practical · Session 7. Corner Café, PhoneHub, their owners and all numbers are made up for practice.</footer>
+<footer>Southwest AI · AI Made Practical · Session 7. Corner Café, its owner and all numbers are made up for practice.</footer>
 </main>
 <script>
 (function(){
