@@ -69,7 +69,7 @@ button{font:inherit;cursor:pointer}
 .tools .card{margin:0}
 .tag{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;border-radius:999px;padding:2px 9px;background:var(--mint);color:var(--teal)}
 .tag.c{background:#FDE5DF;color:#A8432F}
-.dl{display:inline-block;background:var(--teal);color:#fff;text-decoration:none;font-weight:700;border-radius:999px;padding:9px 18px;margin:6px 0}
+.dl{display:inline-block;background:var(--teal);color:#fff;text-decoration:none;font-weight:700;border-radius:999px;padding:9px 18px;margin:6px 8px 6px 0}
 details{background:#fff;border:1px solid var(--pale);border-radius:12px;padding:10px 16px;margin:8px 0}
 summary{cursor:pointer;font-weight:700}
 footer{margin-top:40px;font-size:14px;color:var(--slate);border-top:1px solid var(--pale);padding-top:14px}
@@ -104,11 +104,13 @@ a{color:var(--teal)}
 <ul class="tight">
   <li><b>Claude:</b> open <a href="https://claude.ai">claude.ai</a> and sign in. Free is fine. File creation must be on (Settings → Capabilities).</li>
   <li><b>Gemini:</b> open <a href="https://gemini.google.com">gemini.google.com</a> with your Google account.</li>
-  <li><b>Your Session 5 work:</b> your cleaned Corner Café spreadsheet and your summary for Maya.</li>
+  <li><b>Your Session 5 work:</b> your Corner Café file with your summary for Maya, and your two chart pictures.</li>
 </ul>
 <div class="card mint">
-  <p><b>No Session 5 file?</b> Download the starter file. It has the clean sales data, inventory, reviews (no personal details) and a ready summary for Maya.</p>
-  <a class="dl" href="files/corner_cafe_session7_starter.xlsx" download>Download the starter file (.xlsx)</a>
+  <p><b>No Session 5 work?</b> Download the Session 5 results: the file the class made last week (summary for Maya, two charts, measures, review labels, checks and clean data, no personal details) and the two chart pictures.</p>
+  <a class="dl" href="files/corner_cafe_session5_output.xlsx" download>Session 5 results file (.xlsx)</a>
+  <a class="dl" href="files/chart1_sales_by_category.png" download>Chart 1 picture (.png)</a>
+  <a class="dl" href="files/chart2_discount_vs_margin.png" download>Chart 2 picture (.png)</a>
 </div>
 <p class="lede">Corner Café, Maya and every number here are made up for class, as in Session 5.</p>
 </section>
@@ -161,11 +163,12 @@ a{color:var(--teal)}
 <h2><span class="n">4</span>Build a simple deck with Claude</h2>
 <p class="lede">Same two prompts in the demo and in your turn. Start a new chat at claude.ai. Keep this first deck simple: titles and short points.</p>
 <h3>Step 1: the outline only</h3>
-<ol class="steps"><li>Click <b>+</b> and attach your Corner Café file (yours or the starter file).</li><li>If your summary is not in the file, paste it under the prompt.</li><li>Copy the prompt, paste it, send.</li></ol>
+<ol class="steps"><li>Click <b>+</b> and attach your Corner Café Session 5 file (yours or the Session 5 results).</li><li>If your summary is not in the file, paste it under the prompt.</li><li>Copy the prompt, paste it, send.</li></ol>
 <div class="prompt"><div class="ph"><span>Outline prompt <em>· Claude</em></span><button class="copy" type="button" data-for="p1">Copy</button></div><pre id="p1">You are helping Maya, owner of Corner Café, plan a short presentation.
-I attached my Corner Café spreadsheet. Read my summary for Maya first (in the file, or pasted below), then the Sales, Inventory and Reviews data.
+I attached my Session 5 Corner Café file. Read my summary for Maya first, then my charts, measures and review labels. Use the clean data only to check numbers.
 Make an OUTLINE ONLY for a 6-slide deck. Maya will present it to her two café leads to agree the holiday plan.
 For each slide, give a title that states the message as one full sentence, and 2 or 3 short points.
+Say which slide each of my two charts belongs on.
 The last slide must say what Maya needs from the café leads.
 Tone: plain and friendly.
 Use only numbers from my file. If something is missing, write [NEED: what is missing] instead of guessing.</pre></div>
@@ -219,12 +222,15 @@ Give me a new version of the PowerPoint file.</pre></div>
 warm café colors (dark brown, cream and one orange accent), large clear titles.
 Keep every slide's words and speaker notes the same.
 Give me a new version of the PowerPoint file.</pre></div>
-<h3>Step 3: add a chart or image</h3>
-<div class="prompt"><div class="ph"><span>Chart or image <em>· Claude</em></span><button class="copy" type="button" data-for="p6">Copy</button></div><pre id="p6">On slide 2, add a bar chart of sales by category from my spreadsheet. Label each bar with its dollar amount.
+<h3>Step 3: add your charts and an icon</h3>
+<ol class="steps"><li>Click <b>+</b> and attach your two Session 5 chart pictures.</li><li>Copy the prompt, paste it, send.</li></ol>
+<div class="prompt"><div class="ph"><span>Charts and icon <em>· Claude</em></span><button class="copy" type="button" data-for="p6">Copy</button></div><pre id="p6">I attached my two Session 5 chart pictures.
+Put the sales-by-category chart on the slide about what sells, and the discount-and-margin chart on the slide about online discounts.
+Make each chart large and keep its title. Do not redraw them.
 On the title slide, add a simple coffee cup icon.
 Keep all other slides the same.
 Give me a new version of the PowerPoint file.</pre></div>
-<p>Claude makes charts and simple icons from your data. For a <b>photo</b>, use Google Slides: <b>Insert → Image → Search the web</b>.</p>
+<p>Claude places your charts and draws simple icons. For a <b>photo</b>, use Google Slides: <b>Insert → Image → Search the web</b>.</p>
 <p><b>One slide only?</b> Name it, and say what stays: <i>“Change only slide 3. Keep all other slides exactly as they are.”</i></p>
 </section>
 
