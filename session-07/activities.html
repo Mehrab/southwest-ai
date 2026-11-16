@@ -161,10 +161,19 @@ a{color:var(--teal)}
 
 <section id="build">
 <h2><span class="n">4</span>Build a simple deck with Claude</h2>
-<p class="lede">Same two prompts in the demo and in your turn. Start a new chat at claude.ai. Keep this first deck simple: titles and short points.</p>
-<h3>Step 1: the outline only</h3>
+<p class="lede">The demo builds Maya's deck from a short brief, with no file. You build the same deck from your Session 5 results. Then compare: what does yours say that the demo deck couldn't?</p>
+<h3>In the demo: a deck from a brief only</h3>
+<p>No attachment. Claude gets only these words, so every fact comes back as a [NEED]. Try it at home to see the difference.</p>
+<div class="prompt"><div class="ph"><span>Brief-only outline prompt (demo) <em>· Claude</em></span><button class="copy" type="button" data-for="p1">Copy</button></div><pre id="p1">You are helping Maya, owner of Corner Café, plan a short presentation.
+About us: two cafés (Austin and Nashville) and an online store. We sell coffee beans, brewing gear, mugs and subscriptions.
+Maya wants her two café leads to agree a holiday plan: what to promote, and whether our online discounts are too deep.
+Make an OUTLINE ONLY for a 6-slide deck. For each slide, give a title that states the message as one full sentence, and 2 or 3 short points.
+The last slide must say what Maya needs from the café leads.
+Tone: plain and friendly.
+I have not given you any numbers. Do not invent any. Write [NEED: what is missing] wherever a number or fact should go.</pre></div>
+<h3>Your turn, step 1: the outline only, from your file</h3>
 <ol class="steps"><li>Click <b>+</b> and attach your Corner Café Session 5 file (yours or the Session 5 results).</li><li>If your summary is not in the file, paste it under the prompt.</li><li>Copy the prompt, paste it, send.</li></ol>
-<div class="prompt"><div class="ph"><span>Outline prompt <em>· Claude</em></span><button class="copy" type="button" data-for="p1">Copy</button></div><pre id="p1">You are helping Maya, owner of Corner Café, plan a short presentation.
+<div class="prompt"><div class="ph"><span>Outline prompt <em>· Claude</em></span><button class="copy" type="button" data-for="p2">Copy</button></div><pre id="p2">You are helping Maya, owner of Corner Café, plan a short presentation.
 I attached my Session 5 Corner Café file. Read my summary for Maya first, then my charts, measures and review labels. Use the clean data only to check numbers.
 Make an OUTLINE ONLY for a 6-slide deck. Maya will present it to her two café leads to agree the holiday plan.
 For each slide, give a title that states the message as one full sentence, and 2 or 3 short points.
@@ -173,14 +182,14 @@ The last slide must say what Maya needs from the café leads.
 Tone: plain and friendly.
 Use only numbers from my file. If something is missing, write [NEED: what is missing] instead of guessing.</pre></div>
 <p>Run the title test. Fix at least one title by replying, for example: <i>“Move slide 5 before slide 4.”</i></p>
-<h3>Step 2: build the deck</h3>
-<div class="prompt"><div class="ph"><span>Build prompt <em>· Claude</em></span><button class="copy" type="button" data-for="p2">Copy</button></div><pre id="p2">Now build the deck from this outline as a PowerPoint file.
+<h3>Your turn, step 2: build the deck</h3>
+<div class="prompt"><div class="ph"><span>Build prompt <em>· Claude</em></span><button class="copy" type="button" data-for="p3">Copy</button></div><pre id="p3">Now build the deck from this outline as a PowerPoint file.
 - Use my slide titles exactly as written.
 - Up to 3 short points per slide. Few words.
 - Keep it simple: no speaker notes or pictures yet.
-- Keep every [NEED] tag. Do not add any number that is not in my file.
+- Keep every [NEED] tag. Do not add any number I did not give you.
 Create it as a PowerPoint (.pptx) file I can download.</pre></div>
-<ol class="steps"><li>Click the file to preview it, then <b>Download</b>.</li><li>Open it in PowerPoint, or upload it to Google Drive and open with Google Slides.</li><li>Read only the titles out loud. They should tell the plan. Keep the file open.</li></ol>
+<ol class="steps"><li>Click the file to preview it, then <b>Download</b>.</li><li>Open it in PowerPoint, or upload it to Google Drive and open with Google Slides.</li><li>Read only the titles out loud. They should tell the plan.</li><li>Compare with the demo deck: which [NEED]s are now real numbers? Keep the file open.</li></ol>
 </section>
 
 <section id="parts">
@@ -208,23 +217,23 @@ Create it as a PowerPoint (.pptx) file I can download.</pre></div>
 <p class="lede">Stay in the same Claude chat. One request per step. Each step gives you a new version of the file.</p>
 <h3>Stuck on how to ask? Let AI write the prompt</h3>
 <p>Say what you want in your own words. Read the prompt Claude writes, fix anything wrong, then paste it back. Works for any step below.</p>
-<div class="prompt"><div class="ph"><span>Write-my-prompt prompt <em>· Claude</em></span><button class="copy" type="button" data-for="p3">Copy</button></div><pre id="p3">Write me a clear prompt I can paste back here to change my deck.
+<div class="prompt"><div class="ph"><span>Write-my-prompt prompt <em>· Claude</em></span><button class="copy" type="button" data-for="p4">Copy</button></div><pre id="p4">Write me a clear prompt I can paste back here to change my deck.
 What I want: [say it in your own words, for example: warmer café colors and a chart on slide 2]
 Keep the prompt short.</pre></div>
 <h3>Step 1: add speaker notes</h3>
-<div class="prompt"><div class="ph"><span>Speaker notes <em>· Claude</em></span><button class="copy" type="button" data-for="p4">Copy</button></div><pre id="p4">Add speaker notes to every slide: 3 or 4 sentences Maya would say out loud to her café leads.
+<div class="prompt"><div class="ph"><span>Speaker notes <em>· Claude</em></span><button class="copy" type="button" data-for="p5">Copy</button></div><pre id="p5">Add speaker notes to every slide: 3 or 4 sentences Maya would say out loud to her café leads.
 Plain and friendly. Use only numbers from my file.
 Keep every slide's title and points the same.
 Give me a new version of the PowerPoint file.</pre></div>
 <p>Read the notes out loud. Change any line Maya wouldn't say.</p>
 <h3>Step 2: change the theme colors</h3>
-<div class="prompt"><div class="ph"><span>Theme colors <em>· Claude</em></span><button class="copy" type="button" data-for="p5">Copy</button></div><pre id="p5">Change the theme of my whole deck:
+<div class="prompt"><div class="ph"><span>Theme colors <em>· Claude</em></span><button class="copy" type="button" data-for="p6">Copy</button></div><pre id="p6">Change the theme of my whole deck:
 warm café colors (dark brown, cream and one orange accent), large clear titles.
 Keep every slide's words and speaker notes the same.
 Give me a new version of the PowerPoint file.</pre></div>
 <h3>Step 3: add your charts and an icon</h3>
 <ol class="steps"><li>Click <b>+</b> and attach your two Session 5 chart pictures.</li><li>Copy the prompt, paste it, send.</li></ol>
-<div class="prompt"><div class="ph"><span>Charts and icon <em>· Claude</em></span><button class="copy" type="button" data-for="p6">Copy</button></div><pre id="p6">I attached my two Session 5 chart pictures.
+<div class="prompt"><div class="ph"><span>Charts and icon <em>· Claude</em></span><button class="copy" type="button" data-for="p7">Copy</button></div><pre id="p7">I attached my two Session 5 chart pictures.
 Put the sales-by-category chart on the slide about what sells, and the discount-and-margin chart on the slide about online discounts.
 Make each chart large and keep its title. Do not redraw them.
 On the title slide, add a simple coffee cup icon.
@@ -237,7 +246,7 @@ Give me a new version of the PowerPoint file.</pre></div>
 <section id="check">
 <h2><span class="n">7</span>Check it before Maya presents</h2>
 <p class="lede">Notes and charts can bring in new numbers. Check after you modify.</p>
-<div class="prompt"><div class="ph"><span>Check prompt <em>· Claude</em></span><button class="copy" type="button" data-for="p7">Copy</button></div><pre id="p7">List every number on the slides and in the speaker notes.
+<div class="prompt"><div class="ph"><span>Check prompt <em>· Claude</em></span><button class="copy" type="button" data-for="p8">Copy</button></div><pre id="p8">List every number on the slides and in the speaker notes.
 Next to each one, say where in my file it came from.
 If it did not come from my file, say so.</pre></div>
 <div class="card">
@@ -260,7 +269,7 @@ If it did not come from my file, say so.</pre></div>
   <li>Ask for one change in the chat, for example warmer colors.</li>
   <li>Click <b>Share &amp; export → Export to Slides</b>. Your deck opens in Google Slides.</li>
 </ol>
-<div class="prompt"><div class="ph"><span>Canvas prompt <em>· Gemini Canvas</em></span><button class="copy" type="button" data-for="p8">Copy</button></div><pre id="p8">Create a 6-slide presentation from this outline.
+<div class="prompt"><div class="ph"><span>Canvas prompt <em>· Gemini Canvas</em></span><button class="copy" type="button" data-for="p9">Copy</button></div><pre id="p9">Create a 6-slide presentation from this outline.
 Keep my slide titles exactly. Add speaker notes to each slide.
 Use a warm, simple café style.
 Do not add any number that is not in my outline. Keep every [NEED] tag.
