@@ -86,11 +86,17 @@ a{color:var(--teal)}
 </div></header>
 <main class="wrap">
 <nav class="toc" aria-label="On this page"><p>On this page</p><ol>
-  <li><a href="#start">Before you start</a></li><li><a href="#why">Why decks</a></li>
-  <li><a href="#parts">Parts of a deck</a></li><li><a href="#outline">Outline first</a></li>
-  <li><a href="#build">Build with Claude</a></li><li><a href="#modify">Modify your deck</a></li>
-  <li><a href="#canvas">Gemini Canvas</a></li><li><a href="#tools">Gamma, NotebookLM, Canva</a></li>
-  <li><a href="#wrap">Wrap up</a></li><li><a href="#stuck">Stuck?</a></li>
+  <li><a href="#start">Before you start</a></li>
+  <li><a href="#why">Why decks</a></li>
+  <li><a href="#outline">Outline first</a></li>
+  <li><a href="#build">Build a simple deck</a></li>
+  <li><a href="#parts">Parts of a deck</a></li>
+  <li><a href="#modify">Modify in three steps</a></li>
+  <li><a href="#check">Check it</a></li>
+  <li><a href="#canvas">Gemini Canvas</a></li>
+  <li><a href="#tools">Gamma, NotebookLM, Canva</a></li>
+  <li><a href="#wrap">Wrap up</a></li>
+  <li><a href="#stuck">Stuck?</a></li>
 </ol></nav>
 
 <section id="start">
@@ -138,9 +144,45 @@ a{color:var(--teal)}
 </ol>
 </section>
 
+<section id="outline">
+<h2><span class="n">3</span>Outline first</h2>
+<p class="lede">Today's deck: <b>Maya presents the holiday plan to her two café leads.</b> 10 minutes, 6 slides, and she wants them to agree to two 2-week tests.</p>
+<div class="card"><p><b>The title test:</b> read only the titles. Could someone repeat the plan? A topic title (“Sales”) says nothing. A message title (“Whole bean coffee is half our sales”) says the point.</p></div>
+
+<div class="quiz" id="q-titles">
+  <h3>Topic title or message title?</h3><p class="qi">Which one passes the title test?</p>
+  <ol><li data-a="Topic"><p>“Inventory”</p><div class="opts"><button type="button" class="opt">Topic</button><button type="button" class="opt">Message</button></div><p class="fb" hidden data-why="It names a subject but says nothing about it."></p></li><li data-a="Message"><p>“Our two best beans are running low before the holidays”</p><div class="opts"><button type="button" class="opt">Topic</button><button type="button" class="opt">Message</button></div><p class="fb" hidden data-why="Read alone, it tells you the point."></p></li><li data-a="Topic"><p>“Subscriptions”</p><div class="opts"><button type="button" class="opt">Topic</button><button type="button" class="opt">Message</button></div><p class="fb" hidden data-why="Try: “Fix subscriptions before we promote them.”"></p></li></ol>
+  <p class="score" aria-live="polite"></p>
+</div>
+<div class="card ink"><p><b>The [NEED] rule:</b> if something is missing, AI writes [NEED: what is missing] instead of guessing. It's already in the prompts below. Fill every [NEED] yourself, or cut the line.</p></div>
+</section>
+
+<section id="build">
+<h2><span class="n">4</span>Build a simple deck with Claude</h2>
+<p class="lede">Same two prompts in the demo and in your turn. Start a new chat at claude.ai. Keep this first deck simple: titles and short points.</p>
+<h3>Step 1: the outline only</h3>
+<ol class="steps"><li>Click <b>+</b> and attach your Corner Café file (yours or the starter file).</li><li>If your summary is not in the file, paste it under the prompt.</li><li>Copy the prompt, paste it, send.</li></ol>
+<div class="prompt"><div class="ph"><span>Outline prompt <em>· Claude</em></span><button class="copy" type="button" data-for="p1">Copy</button></div><pre id="p1">You are helping Maya, owner of Corner Café, plan a short presentation.
+I attached my Corner Café spreadsheet. Read my summary for Maya first (in the file, or pasted below), then the Sales, Inventory and Reviews data.
+Make an OUTLINE ONLY for a 6-slide deck. Maya will present it to her two café leads to agree the holiday plan.
+For each slide, give a title that states the message as one full sentence, and 2 or 3 short points.
+The last slide must say what Maya needs from the café leads.
+Tone: plain and friendly.
+Use only numbers from my file. If something is missing, write [NEED: what is missing] instead of guessing.</pre></div>
+<p>Run the title test. Fix at least one title by replying, for example: <i>“Move slide 5 before slide 4.”</i></p>
+<h3>Step 2: build the deck</h3>
+<div class="prompt"><div class="ph"><span>Build prompt <em>· Claude</em></span><button class="copy" type="button" data-for="p2">Copy</button></div><pre id="p2">Now build the deck from this outline as a PowerPoint file.
+- Use my slide titles exactly as written.
+- Up to 3 short points per slide. Few words.
+- Keep it simple: no speaker notes or pictures yet.
+- Keep every [NEED] tag. Do not add any number that is not in my file.
+Create it as a PowerPoint (.pptx) file I can download.</pre></div>
+<ol class="steps"><li>Click the file to preview it, then <b>Download</b>.</li><li>Open it in PowerPoint, or upload it to Google Drive and open with Google Slides.</li><li>Read only the titles out loud. They should tell the plan. Keep the file open.</li></ol>
+</section>
+
 <section id="parts">
-<h2><span class="n">3</span>Parts of a deck</h2>
-<p class="lede">If you can name the part, you can ask AI to change it.</p>
+<h2><span class="n">5</span>Parts of a deck</h2>
+<p class="lede">Look at the deck you just built. If you can name the part, you can ask AI to change it. Which part is still empty?</p>
 <ul class="tight">
   <li><b>Theme:</b> colors, fonts and background for the whole deck.</li>
   <li><b>Layouts:</b> where things sit on a slide (title only, two columns, big picture).</li>
@@ -158,43 +200,38 @@ a{color:var(--teal)}
 </div>
 </section>
 
-<section id="outline">
-<h2><span class="n">4</span>Outline first</h2>
-<p class="lede">Today's deck: <b>Maya presents the holiday plan to her two café leads.</b> 10 minutes, 6 slides, and she wants them to agree to two 2-week tests.</p>
-<div class="card"><p><b>The title test:</b> read only the titles. Could someone repeat the plan? A topic title (“Sales”) says nothing. A message title (“Whole bean coffee is half our sales”) says the point.</p></div>
-
-<div class="quiz" id="q-titles">
-  <h3>Topic title or message title?</h3><p class="qi">Which one passes the title test?</p>
-  <ol><li data-a="Topic"><p>“Inventory”</p><div class="opts"><button type="button" class="opt">Topic</button><button type="button" class="opt">Message</button></div><p class="fb" hidden data-why="It names a subject but says nothing about it."></p></li><li data-a="Message"><p>“Our two best beans are running low before the holidays”</p><div class="opts"><button type="button" class="opt">Topic</button><button type="button" class="opt">Message</button></div><p class="fb" hidden data-why="Read alone, it tells you the point."></p></li><li data-a="Topic"><p>“Subscriptions”</p><div class="opts"><button type="button" class="opt">Topic</button><button type="button" class="opt">Message</button></div><p class="fb" hidden data-why="Try: “Fix subscriptions before we promote them.”"></p></li></ol>
-  <p class="score" aria-live="polite"></p>
-</div>
-<div class="card ink"><p><b>The [NEED] rule:</b> if something is missing, AI writes [NEED: what is missing] instead of guessing. It's already in the prompts below. Fill every [NEED] yourself, or cut the line.</p></div>
+<section id="modify">
+<h2><span class="n">6</span>Modify your deck in three steps</h2>
+<p class="lede">Stay in the same Claude chat. One request per step. Each step gives you a new version of the file.</p>
+<h3>Stuck on how to ask? Let AI write the prompt</h3>
+<p>Say what you want in your own words. Read the prompt Claude writes, fix anything wrong, then paste it back. Works for any step below.</p>
+<div class="prompt"><div class="ph"><span>Write-my-prompt prompt <em>· Claude</em></span><button class="copy" type="button" data-for="p3">Copy</button></div><pre id="p3">Write me a clear prompt I can paste back here to change my deck.
+What I want: [say it in your own words, for example: warmer café colors and a chart on slide 2]
+Keep the prompt short.</pre></div>
+<h3>Step 1: add speaker notes</h3>
+<div class="prompt"><div class="ph"><span>Speaker notes <em>· Claude</em></span><button class="copy" type="button" data-for="p4">Copy</button></div><pre id="p4">Add speaker notes to every slide: 3 or 4 sentences Maya would say out loud to her café leads.
+Plain and friendly. Use only numbers from my file.
+Keep every slide's title and points the same.
+Give me a new version of the PowerPoint file.</pre></div>
+<p>Read the notes out loud. Change any line Maya wouldn't say.</p>
+<h3>Step 2: change the theme colors</h3>
+<div class="prompt"><div class="ph"><span>Theme colors <em>· Claude</em></span><button class="copy" type="button" data-for="p5">Copy</button></div><pre id="p5">Change the theme of my whole deck:
+warm café colors (dark brown, cream and one orange accent), large clear titles.
+Keep every slide's words and speaker notes the same.
+Give me a new version of the PowerPoint file.</pre></div>
+<h3>Step 3: add a chart or image</h3>
+<div class="prompt"><div class="ph"><span>Chart or image <em>· Claude</em></span><button class="copy" type="button" data-for="p6">Copy</button></div><pre id="p6">On slide 2, add a bar chart of sales by category from my spreadsheet. Label each bar with its dollar amount.
+On the title slide, add a simple coffee cup icon.
+Keep all other slides the same.
+Give me a new version of the PowerPoint file.</pre></div>
+<p>Claude makes charts and simple icons from your data. For a <b>photo</b>, use Google Slides: <b>Insert → Image → Search the web</b>.</p>
+<p><b>One slide only?</b> Name it, and say what stays: <i>“Change only slide 3. Keep all other slides exactly as they are.”</i></p>
 </section>
 
-<section id="build">
-<h2><span class="n">5</span>Build with Claude</h2>
-<p class="lede">Same three prompts in the demo and in your turn. Start a new chat at claude.ai.</p>
-<h3>Step 1: the outline only</h3>
-<ol class="steps"><li>Click <b>+</b> and attach your Corner Café file (yours or the starter file).</li><li>If your summary is not in the file, paste it under the prompt.</li><li>Copy the prompt, paste it, send.</li></ol>
-<div class="prompt"><div class="ph"><span>Outline prompt <em>· Claude</em></span><button class="copy" type="button" data-for="p1">Copy</button></div><pre id="p1">You are helping Maya, owner of Corner Café, plan a short presentation.
-I attached my Corner Café spreadsheet. Read my summary for Maya first (in the file, or pasted below), then the Sales, Inventory and Reviews data.
-Make an OUTLINE ONLY for a 6-slide deck. Maya will present it to her two café leads to agree the holiday plan.
-For each slide, give a title that states the message as one full sentence, and 2 or 3 short points.
-The last slide must say what Maya needs from the café leads.
-Tone: plain and friendly.
-Use only numbers from my file. If something is missing, write [NEED: what is missing] instead of guessing.</pre></div>
-<p>Run the title test. Fix at least one title by replying, for example: <i>“Move slide 5 before slide 4.”</i></p>
-<h3>Step 2: build the deck</h3>
-<div class="prompt"><div class="ph"><span>Build prompt <em>· Claude</em></span><button class="copy" type="button" data-for="p2">Copy</button></div><pre id="p2">Now build the deck from this outline as a PowerPoint file.
-- Use my slide titles exactly as written.
-- Up to 3 short points per slide. Few words.
-- Add speaker notes to every slide: 3 or 4 sentences Maya would say out loud.
-- Where a slide has numbers, add a simple chart made from my spreadsheet.
-- Keep every [NEED] tag. Do not add any number that is not in my file.
-Create it as a PowerPoint (.pptx) file I can download.</pre></div>
-<ol class="steps"><li>Click the file to preview it, then <b>Download</b>.</li><li>Open it in PowerPoint, or upload it to Google Drive and open with Google Slides.</li><li>Read your speaker notes out loud.</li></ol>
-<h3>Step 3: check it</h3>
-<div class="prompt"><div class="ph"><span>Check prompt <em>· Claude</em></span><button class="copy" type="button" data-for="p3">Copy</button></div><pre id="p3">List every number on the slides and in the speaker notes.
+<section id="check">
+<h2><span class="n">7</span>Check it before Maya presents</h2>
+<p class="lede">Notes and charts can bring in new numbers. Check after you modify.</p>
+<div class="prompt"><div class="ph"><span>Check prompt <em>· Claude</em></span><button class="copy" type="button" data-for="p7">Copy</button></div><pre id="p7">List every number on the slides and in the speaker notes.
 Next to each one, say where in my file it came from.
 If it did not come from my file, say so.</pre></div>
 <div class="card">
@@ -209,35 +246,8 @@ If it did not come from my file, say so.</pre></div>
 </div>
 </section>
 
-<section id="modify">
-<h2><span class="n">6</span>Modify your deck</h2>
-<p class="lede">Stay in the same Claude chat. Each change gives you a new version of the file.</p>
-<h3>Stuck on how to ask? Let AI write the prompt</h3>
-<p>Say what you want in your own words. Read the prompt Claude writes, fix anything wrong, then paste it back.</p>
-<div class="prompt"><div class="ph"><span>Write-my-prompt prompt <em>· Claude</em></span><button class="copy" type="button" data-for="p4">Copy</button></div><pre id="p4">Write me a clear prompt I can paste back here to change my deck.
-What I want: [say it in your own words, for example: warmer café colors and a chart on slide 2]
-Keep the prompt short.</pre></div>
-<h3>Change colors and theme</h3>
-<div class="prompt"><div class="ph"><span>Colors and theme <em>· Claude</em></span><button class="copy" type="button" data-for="p5">Copy</button></div><pre id="p5">Change the theme of my whole deck:
-warm café colors (dark brown, cream and one orange accent), large clear titles.
-Keep every slide's words and speaker notes the same.
-Give me a new version of the PowerPoint file.</pre></div>
-<h3>Add a chart or image</h3>
-<div class="prompt"><div class="ph"><span>Chart or image <em>· Claude</em></span><button class="copy" type="button" data-for="p6">Copy</button></div><pre id="p6">On slide 2, add a bar chart of sales by category from my spreadsheet. Label each bar with its dollar amount.
-On the title slide, add a simple coffee cup icon.
-Keep all other slides the same.
-Give me a new version of the PowerPoint file.</pre></div>
-<p>Claude makes charts and simple shapes from your data. For a <b>photo</b>, use Google Slides: <b>Insert → Image → Search the web</b>.</p>
-<h3>Change one slide only</h3>
-<div class="prompt"><div class="ph"><span>One slide <em>· Claude</em></span><button class="copy" type="button" data-for="p7">Copy</button></div><pre id="p7">Change only slide 3.
-Make the title shorter, and turn the points into a chart comparing the online and in-store discount.
-Keep all other slides exactly as they are.
-Give me a new version of the PowerPoint file.</pre></div>
-<p>Always say what must stay the same, or Claude may rebuild everything.</p>
-</section>
-
 <section id="canvas">
-<h2><span class="n">7</span>Gemini Canvas → Google Slides</h2>
+<h2><span class="n">8</span>Gemini Canvas → Google Slides</h2>
 <ol class="steps">
   <li>Open <a href="https://gemini.google.com">gemini.google.com</a>. In the prompt bar, open <b>Tools</b> and pick <b>Canvas</b>.</li>
   <li>Copy the prompt below. Replace the last line with your fixed outline from Claude. Send.</li>
@@ -260,7 +270,7 @@ Do not add any number that is not in my outline. Keep every [NEED] tag.
 </section>
 
 <section id="tools">
-<h2><span class="n">8</span>Gamma, NotebookLM, Canva</h2>
+<h2><span class="n">9</span>Gamma, NotebookLM, Canva</h2>
 <p class="lede">Watch Gamma and NotebookLM in class. Try all three at home with your fixed outline.</p>
 <div class="tools">
   <div class="card"><span class="tag c">Demo</span><h3>Gamma</h3><p><a href="https://gamma.app">gamma.app</a> → Create new → Paste in text → paste your outline → Generate → pick a theme.</p><p>Free plan: credits for about 10 decks, a Gamma badge on exports. Exports PDF, PowerPoint, Google Slides.</p></div>
@@ -271,7 +281,7 @@ Do not add any number that is not in my outline. Keep every [NEED] tag.
 </section>
 
 <section id="wrap">
-<h2><span class="n">9</span>Wrap up</h2>
+<h2><span class="n">10</span>Wrap up</h2>
 <div class="card mint">
 <p><b>Exit ticket</b></p>
 <p>The next deck I'll make with AI is ______________.<br>Its job is: Ask / Teach / Report / Plan / Rally.<br>I'll start with Claude / Gemini because ______________.</p>
@@ -280,7 +290,7 @@ Do not add any number that is not in my outline. Keep every [NEED] tag.
 <ol class="steps">
   <li><b>Purpose:</b> pick a real deck and name its job.</li>
   <li><b>Outline:</b> outline first, message titles, [NEED] rule.</li>
-  <li><b>Build and modify:</b> Claude or Gemini. Change the theme and one slide.</li>
+  <li><b>Build and modify:</b> a simple deck first, then notes, theme and an image.</li>
   <li><b>Check:</b> the five checks. Then present it once, out loud.</li>
 </ol>
 <p>Keep private details out of AI: use placeholders, then add real details yourself.</p>
