@@ -6,171 +6,313 @@
 <title>Session 7: AI in Presentations</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <style>
-:root{color-scheme:light;--ink:#123F4A;--cream:#FAF7F2;--teal:#287A78;--coral:#F07865;--peach:#F4B183;--mint:#E8F1EE;--pale:#D5E4E0;--slate:#536D72;--deep:#193B42;--good:#1E7A4F;--bad:#B4472F}
+:root{color-scheme:light;--ink:#123F4A;--cream:#FAF7F2;--teal:#287A78;--coral:#F07865;--peach:#F4B183;--mint:#E8F1EE;--pale:#D5E4E0;--slate:#536D72;--good:#1E7A4F;--bad:#B4472F;--hdr:52px;--ftr:60px;--rail:236px}
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
-body{margin:0;background:var(--cream);color:var(--ink);font:17px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif}
-.wrap{max-width:820px;margin:0 auto;padding:0 max(16px,env(safe-area-inset-right)) 48px max(16px,env(safe-area-inset-left))}
-header.top{background:var(--ink);color:#fff;padding:28px 0 26px}
-header.top .eyebrow{color:var(--peach);font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin:0 0 10px}
-header.top h1{font-size:32px;line-height:1.15;margin:0 0 8px}
-header.top p.sub{margin:0 0 14px;color:#F6E2D2}
-.spine{display:flex;flex-wrap:wrap;gap:6px;margin:0;padding:0;list-style:none}
-.spine li{font-size:12px;font-weight:700;letter-spacing:.06em;background:rgba(255,255,255,.12);border-radius:999px;padding:4px 10px}
-nav.toc{background:#fff;border:1px solid var(--pale);border-radius:12px;padding:14px 18px;margin:22px 0 8px}
-nav.toc p{margin:0 0 6px;font-size:13px;font-weight:700;letter-spacing:.08em;color:var(--slate);text-transform:uppercase}
-nav.toc ol{margin:0;padding-left:22px;columns:2;column-gap:28px}
-nav.toc a{color:var(--teal)}
-section{margin-top:34px}
-h2{font-size:24px;line-height:1.25;margin:0 0 4px;display:flex;gap:10px;align-items:baseline}
-h2 .n{flex:none;display:inline-grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--coral);color:#fff;font-size:15px}
-h3{font-size:19px;margin:24px 0 8px}
-.lede{color:var(--slate);margin:0 0 14px}
-.card{background:#fff;border:1px solid var(--pale);border-radius:12px;padding:14px 18px;margin:12px 0}
+body{margin:0;background:var(--cream);color:var(--ink);font:16px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif}
+a{color:var(--teal)}
+button{font:inherit;cursor:pointer}
+header.top{height:var(--hdr);background:var(--ink);color:#fff;display:flex;align-items:center;gap:14px;padding:0 max(16px,env(safe-area-inset-right)) 0 max(16px,env(safe-area-inset-left))}
+header.top .ttl{font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+header.top .ttl span{color:var(--peach);font-weight:700;font-size:12px;letter-spacing:.1em;text-transform:uppercase;margin-right:8px}
+.prog{flex:1;min-width:60px;height:6px;background:rgba(255,255,255,.18);border-radius:3px;overflow:hidden}
+.prog i{display:block;height:100%;width:0;background:var(--peach);transition:width .25s}
+.count{font-size:13px;color:#C9DCD8;white-space:nowrap}
+.help{flex:none;background:var(--coral);color:#fff;border:0;border-radius:999px;padding:6px 14px;font-weight:700;font-size:14px;min-height:34px}
+.app{display:grid;grid-template-columns:var(--rail) minmax(0,1fr);height:calc(100vh - var(--hdr));height:calc(100dvh - var(--hdr))}
+nav.rail{border-right:1px solid var(--pale);background:#fff;overflow-y:auto;padding:10px 8px}
+nav.rail button{display:grid;grid-template-columns:24px 1fr auto;gap:8px;align-items:center;width:100%;text-align:left;background:none;border:0;border-radius:10px;padding:6px 8px;color:var(--ink);font-size:14px;line-height:1.25;margin:1px 0}
+nav.rail button:hover{background:var(--mint)}
+nav.rail button[aria-selected="true"]{background:var(--ink);color:#fff}
+nav.rail .num{width:24px;height:24px;border-radius:50%;display:grid;place-items:center;font-size:12px;font-weight:700;background:var(--mint);color:var(--teal)}
+nav.rail button[aria-selected="true"] .num{background:var(--coral);color:#fff}
+nav.rail button.done .num{background:var(--good);color:#fff}
+nav.rail button.done .num b{display:none}
+nav.rail button.done .num::after{content:"✓"}
+nav.rail .t{font-size:11px;color:var(--slate);font-variant-numeric:tabular-nums}
+nav.rail button[aria-selected="true"] .t{color:#C9DCD8}
+nav.rail .lbl small{display:block;font-size:11px;color:var(--slate);letter-spacing:.04em}
+nav.rail button[aria-selected="true"] .lbl small{color:var(--peach)}
+main{display:flex;flex-direction:column;min-height:0}
+.panels{flex:1;min-height:0;overflow-y:auto}
+section.tab{padding:16px 24px 18px;max-width:1240px}
+.js section.tab[hidden]{display:none}
+.th{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:0 0 10px}
+.th h2{font-size:24px;line-height:1.2;margin:0}
+.chip{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;border-radius:999px;padding:3px 10px;background:var(--mint);color:var(--teal)}
+.chip.m-turn{background:var(--coral);color:#fff}.chip.m-demo{background:var(--ink);color:#fff}.chip.m-quiz{background:#FDE5DF;color:#A8432F}
+.chip.slides{background:#fff;border:1px solid var(--pale);color:var(--slate)}
+.cols{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:18px;align-items:start}
+.cols.c-wide{grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr)}
+.three{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;align-items:start;margin-bottom:12px}
+.lede{color:var(--slate);margin:0 0 10px}
+.small{font-size:14px;color:var(--slate);margin:8px 0}
+.k{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--teal);margin:0 0 6px}
+.card{background:#fff;border:1px solid var(--pale);border-radius:12px;padding:12px 16px;margin:0 0 10px}
 .card.mint{background:var(--mint)}
+.card.coral{background:#FDECE7;border-color:#F6C9BD}
 .card.ink{background:var(--ink);color:#fff;border-color:var(--ink)}
-.card p:first-child{margin-top:0}.card p:last-child{margin-bottom:0}
-ul.tight,ol.tight{padding-left:22px;margin:8px 0}
-ul.tight li,ol.tight li{margin:4px 0}
+.card p{margin:6px 0}.card p:first-child{margin-top:0}.card p:last-child{margin-bottom:0}
+.card h3{margin:8px 0 4px;font-size:18px}
+.path{display:flex;flex-wrap:wrap;gap:6px}
+.path span{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;background:var(--ink);color:#fff;border-radius:999px;padding:3px 10px}
 table{width:100%;border-collapse:collapse;font-size:15px;background:#fff;border:1px solid var(--pale);border-radius:12px;overflow:hidden}
 th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--pale);vertical-align:top}
 th{background:var(--mint);font-size:13px;letter-spacing:.04em}
 td:last-child{color:var(--teal);font-weight:600}
-.jobs{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin:12px 0}
-.jobs div{background:#fff;border:1px solid var(--pale);border-radius:12px;padding:12px}
-.jobs b{display:block;letter-spacing:.06em}
+.jobs{display:grid;gap:8px}
+.jobs div{background:#fff;border:1px solid var(--pale);border-radius:10px;padding:8px 12px;display:grid;grid-template-columns:72px 1fr;gap:8px;align-items:baseline}
+.jobs b{letter-spacing:.06em;color:var(--coral)}
 .jobs span{font-size:14px;color:var(--slate)}
-.prompt{background:var(--ink);border-radius:12px;margin:12px 0;overflow:hidden}
-.ph{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 14px 0}
+.rules{margin:0;padding-left:22px}.rules li{margin:0 0 10px}
+.parts{list-style:none;padding:0;margin:0 0 8px;display:grid;gap:6px}
+.parts li{background:#fff;border:1px solid var(--pale);border-radius:10px;padding:7px 12px;font-size:15px;color:var(--slate)}
+.parts b{color:var(--ink);display:inline-block;min-width:118px}
+.prompt{background:var(--ink);border-radius:12px;margin:0 0 10px;overflow:hidden}
+.ph{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:9px 12px 0}
 .ph span{color:var(--peach);font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
 .ph em{font-style:normal;color:#C9DCD8}
-pre{margin:0;padding:10px 14px 16px;color:#fff;white-space:pre-wrap;word-wrap:break-word;font:15px/1.55 ui-monospace,Menlo,Consolas,monospace}
-button{font:inherit;cursor:pointer}
-.copy{flex:none;background:var(--coral);color:#fff;border:0;border-radius:999px;padding:7px 16px;font-size:14px;font-weight:700;min-height:36px}
+pre{margin:0;padding:8px 14px 14px;color:#fff;white-space:pre-wrap;word-wrap:break-word;font:14px/1.5 ui-monospace,Menlo,Consolas,monospace}
+.prompt.tall pre{font-size:13.5px}
+.copy{flex:none;background:var(--coral);color:#fff;border:0;border-radius:999px;padding:5px 14px;font-size:13px;font-weight:700;min-height:32px}
 .copy.done{background:var(--teal)}
-.steps{counter-reset:s;list-style:none;padding:0;margin:10px 0}
-.steps li{counter-increment:s;position:relative;padding:4px 0 4px 40px;margin:6px 0}
-.steps li::before{content:counter(s);position:absolute;left:0;top:3px;width:28px;height:28px;border-radius:50%;background:var(--teal);color:#fff;display:grid;place-items:center;font-size:14px;font-weight:700}
-.quiz{background:#fff;border:2px solid var(--peach);border-radius:14px;padding:6px 18px 12px;margin:18px 0}
-.quiz h3{margin-top:12px}.quiz h3::before{content:"Quiz · ";color:var(--coral)}
-.quiz .qi{color:var(--slate);margin-top:0}
-.quiz ol{padding-left:22px;margin:0}
-.quiz li{margin:0 0 14px}
-.quiz li p{margin:0 0 6px}
-.opts{display:flex;flex-wrap:wrap;gap:8px}
-.opt{background:var(--mint);color:var(--ink);border:1px solid var(--pale);border-radius:999px;padding:7px 14px;min-height:38px;font-size:15px}
+.steps{counter-reset:s;list-style:none;padding:0;margin:0 0 10px}
+.steps li{counter-increment:s;position:relative;padding:3px 0 3px 38px;margin:4px 0}
+.steps li::before{content:counter(s);position:absolute;left:0;top:2px;width:26px;height:26px;border-radius:50%;background:var(--teal);color:#fff;display:grid;place-items:center;font-size:13px;font-weight:700}
+.card .steps li{margin:3px 0}
+.checks{list-style:none;padding:0;margin:0 0 8px;display:grid;gap:6px}
+.checks li{display:flex;gap:10px;align-items:flex-start;background:#fff;border:1px solid var(--pale);border-radius:10px;padding:8px 12px}
+.checks input{width:20px;height:20px;margin:2px 0 0;flex:none;accent-color:var(--good)}
+.checks label{cursor:pointer}
+.checks li:has(input:checked){background:#EEF6F1;border-color:#BFDCCB}
+.checks li:has(input:checked) label{color:var(--slate)}
+.quiz{background:#fff;border:2px solid var(--peach);border-radius:14px;padding:10px 16px 8px;margin:0 0 10px}
+.quiz h3{margin:0 0 2px;font-size:18px}
+.qk{color:var(--coral);margin-right:8px}
+.quiz .qi{color:var(--slate);margin:0 0 8px;font-size:14px}
+.quiz ol{padding-left:20px;margin:0}
+.quiz li{margin:0 0 8px}
+.qrow{display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center;justify-content:space-between}
+.qq{margin:0;flex:1 1 220px;font-size:15px}
+.opts{display:flex;flex-wrap:wrap;gap:6px}
+.opt{background:var(--mint);color:var(--ink);border:1px solid var(--pale);border-radius:999px;padding:4px 12px;min-height:34px;font-size:14px}
 .opt:hover{border-color:var(--teal)}
-.opt.right{background:var(--good);border-color:var(--good);color:#fff}
+.opt.right,.opt.on{background:var(--good);border-color:var(--good);color:#fff}
 .opt.wrong{background:#FBE3DD;border-color:var(--bad);color:var(--bad);text-decoration:line-through}
-.fb{font-size:15px;margin-top:6px!important}
+.fb{font-size:14px;margin:4px 0 0}
 .fb.ok{color:var(--good)}.fb.no{color:var(--bad)}
-.score{font-weight:700;color:var(--teal);margin:4px 0 6px}
-.tools{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
-.tools .card{margin:0}
+.score{font-weight:700;color:var(--teal);margin:2px 0}
 .tag{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;border-radius:999px;padding:2px 9px;background:var(--mint);color:var(--teal)}
 .tag.c{background:#FDE5DF;color:#A8432F}
-.dl{display:inline-block;background:var(--teal);color:#fff;text-decoration:none;font-weight:700;border-radius:999px;padding:9px 18px;margin:6px 8px 6px 0}
-details{background:#fff;border:1px solid var(--pale);border-radius:12px;padding:10px 16px;margin:8px 0}
+.dl{display:inline-block;background:var(--teal);color:#fff;text-decoration:none;font-weight:700;border-radius:999px;padding:8px 16px;margin:6px 0 0}
+.fill{display:block;margin:8px 0}
+.fill input{display:block;width:100%;margin-top:4px;font:inherit;padding:6px 10px;border:1px solid var(--pale);border-radius:8px;background:#fff}
+.fill .opt{margin:4px 4px 0 0}
+.nav{flex:none;height:var(--ftr);border-top:1px solid var(--pale);background:#fff;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:0 24px}
+.nav button{border-radius:999px;padding:8px 18px;font-weight:700;font-size:15px;min-height:40px}
+.prev{background:#fff;border:1px solid var(--pale);color:var(--ink)}
+.next{background:var(--coral);border:0;color:#fff}
+.nav button:disabled{opacity:.35;cursor:default}
+.keys{font-size:12px;color:var(--slate)}
+.drawer{position:fixed;inset:0;background:rgba(18,63,74,.35);display:flex;justify-content:flex-end;z-index:10}
+.drawer[hidden]{display:none}
+.drawer .in{width:min(440px,100%);height:100%;background:var(--cream);overflow-y:auto;padding:16px 18px;box-shadow:-8px 0 24px rgba(0,0,0,.15)}
+.drawer h2{margin:0;font-size:22px}
+.drawer .dh{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.drawer .x{background:#fff;border:1px solid var(--pale);border-radius:999px;padding:4px 14px;font-weight:700}
+details{background:#fff;border:1px solid var(--pale);border-radius:12px;padding:10px 14px;margin:8px 0}
 summary{cursor:pointer;font-weight:700}
-footer{margin-top:40px;font-size:14px;color:var(--slate);border-top:1px solid var(--pale);padding-top:14px}
-a{color:var(--teal)}
-@media (max-width:560px){header.top h1{font-size:27px}nav.toc ol{columns:1}h2{font-size:21px}pre{font-size:14px}}
+details p{margin:8px 0 2px}
+footer.foot{font-size:12px;color:var(--slate);padding:0 24px 14px}
+/* no-JS: everything stacked */
+html:not(.js) .app{display:block;height:auto}
+html:not(.js) nav.rail,html:not(.js) .nav,html:not(.js) .help,html:not(.js) .prog,html:not(.js) .count{display:none}
+html:not(.js) .drawer{position:static;display:block;background:none}
+html:not(.js) .drawer .in{width:auto;height:auto;box-shadow:none}
+html:not(.js) .drawer .x{display:none}
+/* shorter laptop screens */
+@media (min-width:901px) and (max-height:800px){
+  :root{--hdr:46px;--ftr:54px}
+  body{font-size:15px}
+  section.tab{padding:12px 22px 14px}
+  .th{margin-bottom:8px}.th h2{font-size:21px}
+  pre{font-size:13px;line-height:1.45}.prompt.tall pre{font-size:12.5px}
+  .card{padding:10px 14px}
+  .quiz li{margin-bottom:6px}
+  .opt{min-height:30px;padding:3px 11px;font-size:13.5px}
+  .checks li{padding:6px 10px}
+  nav.rail button{padding:5px 8px}
+}
+/* phones and narrow windows */
+@media (max-width:900px){
+  :root{--rail:0px}
+  .app{display:block;height:auto}
+  nav.rail{position:sticky;top:0;z-index:5;display:flex;gap:6px;overflow-x:auto;border-right:0;border-bottom:1px solid var(--pale);padding:8px 10px;scrollbar-width:none}
+  nav.rail button{grid-template-columns:22px auto;width:auto;flex:none;white-space:nowrap;padding:5px 10px 5px 6px;border:1px solid var(--pale)}
+  nav.rail .t,nav.rail .lbl small{display:none}
+  nav.rail .num{width:22px;height:22px}
+  .panels{overflow:visible}
+  section.tab{padding:14px 16px 16px}
+  .cols,.cols.c-wide,.three{grid-template-columns:minmax(0,1fr)}
+  .nav{position:sticky;bottom:0;padding:0 16px}
+  .keys{display:none}
+  header.top .count{display:none}
+  .th h2{font-size:21px}
+}
+@media print{
+  header.top,nav.rail,.nav,.help,.copy{display:none!important}
+  .app{display:block;height:auto}.panels{overflow:visible}
+  section.tab[hidden]{display:block!important}
+  section.tab{break-inside:avoid-page}
+}
 </style>
 </head>
 <body>
-<header class="top"><div class="wrap">
-  <p class="eyebrow">Southwest AI · Session 7</p>
-  <h1>AI in Presentations</h1>
-  <p class="sub">Turn a dashboard into a deck you can stand up and present.</p>
-  <ul class="spine"><li>PURPOSE</li><li>OUTLINE</li><li>BUILD</li><li>MODIFY</li><li>CHECK</li></ul>
-</div></header>
-<main class="wrap">
-<nav class="toc" aria-label="On this page"><p>On this page</p><ol>
-  <li><a href="#start">Before you start</a></li>
-  <li><a href="#why">Why decks</a></li>
-  <li><a href="#outline">Outline first</a></li>
-  <li><a href="#build">Build a simple deck</a></li>
-  <li><a href="#parts">Parts of a deck</a></li>
-  <li><a href="#modify">Modify in three steps</a></li>
-  <li><a href="#check">Check it</a></li>
-  <li><a href="#canvas">Gemini Canvas</a></li>
-  <li><a href="#tools">Gamma, NotebookLM, Canva</a></li>
-  <li><a href="#wrap">Wrap up</a></li>
-  <li><a href="#stuck">Stuck?</a></li>
-</ol></nav>
-
-<section id="start">
-<h2><span class="n">1</span>Before you start</h2>
-<ul class="tight">
-  <li><b>Claude:</b> open <a href="https://claude.ai">claude.ai</a> and sign in. Free is fine. File creation must be on (Settings → Capabilities).</li>
-  <li><b>Gemini:</b> open <a href="https://gemini.google.com">gemini.google.com</a> with your Google account.</li>
-</ul>
-<div class="card mint">
-  <p><b>Today's input: your Corner Café dashboard from Session 5.</b> Have it ready as a PDF. No dashboard, or missed Session 5? Download the sample: two pages of charts, tables, Fact and Guess notes, and two next steps.</p>
-  <a class="dl" href="files/corner_cafe_dashboard.pdf" download>Sample Corner Café dashboard (.pdf)</a>
+<header class="top">
+  <div class="ttl"><span>Session 7</span>AI in Presentations</div>
+  <div class="prog" aria-hidden="true"><i></i></div>
+  <div class="count" aria-live="polite"></div>
+  <button type="button" class="help" aria-haspopup="dialog" aria-controls="stuck">Stuck?</button>
+</header>
+<div class="app">
+  <nav class="rail" role="tablist" aria-label="Session steps" aria-orientation="vertical"><button type="button" role="tab" id="tb-start" aria-controls="start" aria-selected="true" tabindex="0"><span class="num"><b>1</b></span><span class="lbl">Before you start<small>Set up</small></span><span class="t">0:00</span></button><button type="button" role="tab" id="tb-why" aria-controls="why" aria-selected="false" tabindex="-1"><span class="num"><b>2</b></span><span class="lbl">Why decks<small>Watch</small></span><span class="t">0:00</span></button><button type="button" role="tab" id="tb-good" aria-controls="good" aria-selected="false" tabindex="-1"><span class="num"><b>3</b></span><span class="lbl">Good decks + quiz<small>Watch + quiz</small></span><span class="t">0:05</span></button><button type="button" role="tab" id="tb-outline" aria-controls="outline" aria-selected="false" tabindex="-1"><span class="num"><b>4</b></span><span class="lbl">Outline first<small>Watch</small></span><span class="t">0:08</span></button><button type="button" role="tab" id="tb-demo" aria-controls="demo" aria-selected="false" tabindex="-1"><span class="num"><b>5</b></span><span class="lbl">Demo: deck from a brief<small>Live demo</small></span><span class="t">0:08</span></button><button type="button" role="tab" id="tb-your-outline" aria-controls="your-outline" aria-selected="false" tabindex="-1"><span class="num"><b>6</b></span><span class="lbl">Your turn: outline<small>Your turn</small></span><span class="t">0:20</span></button><button type="button" role="tab" id="tb-your-build" aria-controls="your-build" aria-selected="false" tabindex="-1"><span class="num"><b>7</b></span><span class="lbl">Your turn: build<small>Your turn</small></span><span class="t">0:28</span></button><button type="button" role="tab" id="tb-parts" aria-controls="parts" aria-selected="false" tabindex="-1"><span class="num"><b>8</b></span><span class="lbl">Parts of a deck<small>Watch + quiz</small></span><span class="t">0:35</span></button><button type="button" role="tab" id="tb-modify" aria-controls="modify" aria-selected="false" tabindex="-1"><span class="num"><b>9</b></span><span class="lbl">Modify: notes, colors, chart<small>Your turn</small></span><span class="t">0:43</span></button><button type="button" role="tab" id="tb-check" aria-controls="check" aria-selected="false" tabindex="-1"><span class="num"><b>10</b></span><span class="lbl">Check it<small>Your turn</small></span><span class="t">1:00</span></button><button type="button" role="tab" id="tb-canvas" aria-controls="canvas" aria-selected="false" tabindex="-1"><span class="num"><b>11</b></span><span class="lbl">Gemini Canvas → Slides<small>Your turn</small></span><span class="t">1:05</span></button><button type="button" role="tab" id="tb-tools" aria-controls="tools" aria-selected="false" tabindex="-1"><span class="num"><b>12</b></span><span class="lbl">Gamma, NotebookLM, Canva<small>Watch</small></span><span class="t">1:17</span></button><button type="button" role="tab" id="tb-wrap" aria-controls="wrap" aria-selected="false" tabindex="-1"><span class="num"><b>13</b></span><span class="lbl">Wrap up<small>Pair share</small></span><span class="t">1:20</span></button></nav>
+  <main>
+    <div class="panels">
+      
+<section class="tab" id="start" role="tabpanel" aria-labelledby="tb-start" tabindex="-1">
+  <div class="th"><h2>Before you start</h2><span class="chip m-setup">Set up</span><span class="chip slides">Deck slides 1–2</span></div>
+  
+<div class="cols">
+<div>
+  <p class="lede">Get these open before the first demo. Tick each one.</p>
+  <ul class="checks"><li><input type="checkbox" id="c1"><label for="c1"><b>Claude:</b> open <a href="https://claude.ai" target="_blank" rel="noopener">claude.ai</a> and sign in. Free is fine.</label></li><li><input type="checkbox" id="c2"><label for="c2"><b>File creation on:</b> in Claude, Settings → Capabilities. In newer Settings it's called <b>Create and edit files</b>.</label></li><li><input type="checkbox" id="c3"><label for="c3"><b>Gemini:</b> open <a href="https://gemini.google.com" target="_blank" rel="noopener">gemini.google.com</a> with your Google account.</label></li><li><input type="checkbox" id="c4"><label for="c4"><b>Your dashboard:</b> your Corner Café dashboard from Session 5, as a PDF, or the sample on the right.</label></li></ul>
 </div>
-<p class="lede">Everything today uses Corner Café. The business and every number are made up for class, as in Session 5.</p>
+<div>
+  <div class="card mint">
+    <p class="k">Today's input</p>
+    <p><b>Your Corner Café dashboard from Session 5.</b> No dashboard, or missed Session 5? Download the sample: two pages of charts, tables, Fact and Guess notes, and two next steps.</p>
+    <a class="dl" href="files/corner_cafe_dashboard.pdf" download>Sample Corner Café dashboard (.pdf)</a>
+  </div>
+  <div class="card">
+    <p class="k">Today's path</p>
+    <p class="path"><span>Purpose</span><span>Outline</span><span>Build</span><span>Modify</span><span>Check</span></p>
+    <p class="small">Everything today uses Corner Café. The business and every number are made up for class, as in Session 5. Use <b>Next</b> at the bottom or the ← → keys to move.</p>
+  </div>
+</div>
+</div>
 </section>
-
-<section id="why">
-<h2><span class="n">2</span>Why decks</h2>
-<p class="lede">A document is read alone and kept. A deck is shown in a room while someone talks, so something happens in that room: a yes, a plan, a new skill.</p>
-<table><thead><tr><th></th><th>Document</th><th>Deck</th></tr></thead><tbody>
-<tr><td><b>Reader</b></td><td>Reads alone, at their own pace</td><td>Listens to you, glances at the screen</td></tr>
-<tr><td><b>Words</b></td><td>All on the page</td><td>Few on the slide, the rest is what you say</td></tr>
-<tr><td><b>Goal</b></td><td>A record to come back to</td><td>Something happens in the room</td></tr>
-</tbody></table>
-<h3>Five jobs a deck does</h3>
-<div class="jobs">
-  <div><b>ASK</b><span>Get a yes: proposal, budget request, pitch to a bank</span></div>
-  <div><b>TEACH</b><span>Build a skill: training, how-to steps, orientation</span></div>
-  <div><b>REPORT</b><span>Show where things stand: monthly numbers, status update</span></div>
-  <div><b>PLAN</b><span>Get everyone on one plan: kickoff, goals, holiday plan</span></div>
-  <div><b>RALLY</b><span>Move a crowd: town hall, fundraiser, welcome</span></div>
+<section class="tab" id="why" role="tabpanel" aria-labelledby="tb-why" tabindex="-1">
+  <div class="th"><h2>Why decks</h2><span class="chip m-watch">Watch</span><span class="chip slides">Deck slides 3–4</span></div>
+  
+<div class="cols">
+<div>
+  <p class="lede">A document is read alone and kept. A deck is shown in a room while someone talks, so something happens in that room: a yes, a plan, a new skill.</p>
+  <table><thead><tr><th></th><th>Document</th><th>Deck</th></tr></thead><tbody>
+  <tr><td><b>Reader</b></td><td>Reads alone, at their own pace</td><td>Listens to you, glances at the screen</td></tr>
+  <tr><td><b>Words</b></td><td>All on the page</td><td>Few on the slide, the rest is what you say</td></tr>
+  <tr><td><b>Goal</b></td><td>A record to come back to</td><td>Something happens in the room</td></tr>
+  </tbody></table>
 </div>
+<div>
+  <p class="k">Five jobs a deck does</p>
+  <div class="jobs">
+    <div><b>ASK</b><span>Get a yes: proposal, budget request, pitch to a bank</span></div>
+    <div><b>TEACH</b><span>Build a skill: training, how-to steps, orientation</span></div>
+    <div><b>REPORT</b><span>Show where things stand: monthly numbers, status update</span></div>
+    <div><b>PLAN</b><span>Get everyone on one plan: kickoff, goals, holiday plan</span></div>
+    <div><b>RALLY</b><span>Move a crowd: town hall, fundraiser, welcome</span></div>
+  </div>
+</div>
+</div>
+</section>
+<section class="tab" id="good" role="tabpanel" aria-labelledby="tb-good" tabindex="-1">
+  <div class="th"><h2>Good decks + quiz</h2><span class="chip m-quiz">Watch + quiz</span><span class="chip slides">Deck slides 4–5</span></div>
+  
+<div class="cols">
+<div>
+  <p class="k">What makes a good deck</p>
+  <ol class="rules">
+    <li><b>One message per slide, and the title says it.</b> “Online discounts are five times deeper than in store”, not “Online discounts”.</li>
+    <li><b>The slide is for the room. The notes are for you.</b> A title and up to 3 short points on screen.</li>
+    <li><b>It ends with the ask.</b> What you want the room to decide or do.</li>
+    <li><b>Fewer true slides beat more impressive ones.</b> Cut any slide you can't stand behind.</li>
+  </ol>
+</div>
+<div>
 
 <div class="quiz" id="q-jobs">
-  <h3>Match the deck to its job</h3><p class="qi">Tap the job each Corner Café deck does. (Corner Café is today's business.)</p>
-  <ol><li data-a="Report"><p>Maya's monthly sales numbers for the café owners' meeting</p><div class="opts"><button type="button" class="opt">Ask</button><button type="button" class="opt">Teach</button><button type="button" class="opt">Report</button><button type="button" class="opt">Plan</button><button type="button" class="opt">Rally</button></div><p class="fb" hidden data-why="It shows where things stand."></p></li><li data-a="Ask"><p>A request to buy a new espresso machine</p><div class="opts"><button type="button" class="opt">Ask</button><button type="button" class="opt">Teach</button><button type="button" class="opt">Report</button><button type="button" class="opt">Plan</button><button type="button" class="opt">Rally</button></div><p class="fb" hidden data-why="It needs a yes."></p></li><li data-a="Teach"><p>How to close the register, for new hires</p><div class="opts"><button type="button" class="opt">Ask</button><button type="button" class="opt">Teach</button><button type="button" class="opt">Report</button><button type="button" class="opt">Plan</button><button type="button" class="opt">Rally</button></div><p class="fb" hidden data-why="It builds a skill."></p></li><li data-a="Plan"><p>The holiday plan for both cafés</p><div class="opts"><button type="button" class="opt">Ask</button><button type="button" class="opt">Teach</button><button type="button" class="opt">Report</button><button type="button" class="opt">Plan</button><button type="button" class="opt">Rally</button></div><p class="fb" hidden data-why="It gets everyone on one plan. The demo deck is this one, with an ask at the end."></p></li><li data-a="Rally"><p>A coffee tasting night for the neighborhood</p><div class="opts"><button type="button" class="opt">Ask</button><button type="button" class="opt">Teach</button><button type="button" class="opt">Report</button><button type="button" class="opt">Plan</button><button type="button" class="opt">Rally</button></div><p class="fb" hidden data-why="It brings people together."></p></li></ol>
+  <h3><span class="qk">Quiz</span>Match the deck to its job</h3><p class="qi">Tap the job each Corner Café deck does.</p>
+  <ol><li data-a="Report"><div class="qrow"><p class="qq">Maya's monthly sales numbers for her owners' meeting</p><div class="opts"><button type="button" class="opt">Ask</button><button type="button" class="opt">Teach</button><button type="button" class="opt">Report</button><button type="button" class="opt">Plan</button><button type="button" class="opt">Rally</button></div></div><p class="fb" hidden data-why="It shows where things stand."></p></li><li data-a="Ask"><div class="qrow"><p class="qq">A request to buy a new espresso machine</p><div class="opts"><button type="button" class="opt">Ask</button><button type="button" class="opt">Teach</button><button type="button" class="opt">Report</button><button type="button" class="opt">Plan</button><button type="button" class="opt">Rally</button></div></div><p class="fb" hidden data-why="It needs a yes."></p></li><li data-a="Teach"><div class="qrow"><p class="qq">How to close the register, for new hires</p><div class="opts"><button type="button" class="opt">Ask</button><button type="button" class="opt">Teach</button><button type="button" class="opt">Report</button><button type="button" class="opt">Plan</button><button type="button" class="opt">Rally</button></div></div><p class="fb" hidden data-why="It builds a skill."></p></li><li data-a="Plan"><div class="qrow"><p class="qq">The holiday plan for both cafés</p><div class="opts"><button type="button" class="opt">Ask</button><button type="button" class="opt">Teach</button><button type="button" class="opt">Report</button><button type="button" class="opt">Plan</button><button type="button" class="opt">Rally</button></div></div><p class="fb" hidden data-why="It gets everyone on one plan. Today's deck is this one, with an ask at the end."></p></li><li data-a="Rally"><div class="qrow"><p class="qq">A coffee tasting night for the neighborhood</p><div class="opts"><button type="button" class="opt">Ask</button><button type="button" class="opt">Teach</button><button type="button" class="opt">Report</button><button type="button" class="opt">Plan</button><button type="button" class="opt">Rally</button></div></div><p class="fb" hidden data-why="It brings people together."></p></li></ol>
   <p class="score" aria-live="polite"></p>
 </div>
-<h3>What makes a good deck</h3>
-<ol class="tight">
-  <li>One message per slide, and the title says it.</li>
-  <li>The slide is for the room. The notes are for you.</li>
-  <li>It ends with the ask: what you want the room to decide or do.</li>
-  <li>Fewer true slides beat more impressive ones.</li>
-</ol>
+</div>
+</div>
 </section>
-
-<section id="outline">
-<h2><span class="n">3</span>Outline first</h2>
-<p class="lede"><b>Demo deck:</b> Maya, owner of Corner Café, presents the holiday plan to her two café leads.<br><b>Your deck:</b> the same deck, built from your dashboard: what to restock and promote, and whether online discounts are too deep. 6 slides, ending with two 2-week tests.</p>
-<div class="card"><p><b>The title test:</b> read only the titles. Could someone repeat the plan? A topic title (“Sales”) says nothing. A message title (“Whole bean coffee is half our sales”) says the point.</p></div>
+<section class="tab" id="outline" role="tabpanel" aria-labelledby="tb-outline" tabindex="-1">
+  <div class="th"><h2>Outline first</h2><span class="chip m-watch">Watch</span><span class="chip slides">Deck slides 7–9</span></div>
+  
+<div class="cols">
+<div>
+  <div class="card">
+    <p class="k">Today's deck</p>
+    <p><b>Maya</b>, owner of Corner Café, presents the holiday plan to her two café leads (Austin and Nashville): what to restock and promote, and whether online discounts are too deep. 6 slides, ending with two 2-week tests.</p>
+  </div>
+  <div class="card"><p><b>The title test:</b> read only the titles. Could someone repeat the plan? A topic title (“Sales”) says nothing. A message title (“Whole bean coffee is half our sales”) says the point.</p></div>
+  <div class="card ink"><p><b>The [NEED] rule:</b> if something is missing, AI writes [NEED: what is missing] instead of guessing. It's already in every prompt today. Fill every [NEED] yourself, or cut the line.</p></div>
+</div>
+<div>
 
 <div class="quiz" id="q-titles">
-  <h3>Topic title or message title?</h3><p class="qi">Which one passes the title test?</p>
-  <ol><li data-a="Topic"><p>“Inventory”</p><div class="opts"><button type="button" class="opt">Topic</button><button type="button" class="opt">Message</button></div><p class="fb" hidden data-why="It names a subject but says nothing about it."></p></li><li data-a="Message"><p>“Our two best beans are running low before the holidays”</p><div class="opts"><button type="button" class="opt">Topic</button><button type="button" class="opt">Message</button></div><p class="fb" hidden data-why="Read alone, it tells you the point."></p></li><li data-a="Topic"><p>“Subscriptions”</p><div class="opts"><button type="button" class="opt">Topic</button><button type="button" class="opt">Message</button></div><p class="fb" hidden data-why="Try: “Fix subscriptions before we promote them.”"></p></li></ol>
+  <h3><span class="qk">Quiz</span>Topic title or message title?</h3><p class="qi">Which one passes the title test?</p>
+  <ol><li data-a="Topic"><div class="qrow"><p class="qq">“Inventory”</p><div class="opts"><button type="button" class="opt">Topic</button><button type="button" class="opt">Message</button></div></div><p class="fb" hidden data-why="It names a subject but says nothing about it."></p></li><li data-a="Message"><div class="qrow"><p class="qq">“Our two best beans are running low before the holidays”</p><div class="opts"><button type="button" class="opt">Topic</button><button type="button" class="opt">Message</button></div></div><p class="fb" hidden data-why="Read alone, it tells you the point."></p></li><li data-a="Topic"><div class="qrow"><p class="qq">“Subscriptions”</p><div class="opts"><button type="button" class="opt">Topic</button><button type="button" class="opt">Message</button></div></div><p class="fb" hidden data-why="Try: “Fix subscriptions before we promote them.”"></p></li></ol>
   <p class="score" aria-live="polite"></p>
 </div>
-<div class="card ink"><p><b>The [NEED] rule:</b> if something is missing, AI writes [NEED: what is missing] instead of guessing. It's already in the prompts below. Fill every [NEED] yourself, or cut the line.</p></div>
+  <p class="small">Privacy: no customer names, phones or emails. On a slide, in notes, or in AI.</p>
+</div>
+</div>
 </section>
-
-<section id="build">
-<h2><span class="n">4</span>Build a simple deck with Claude</h2>
-<p class="lede">The demo builds Corner Café's deck from a short brief, with no file. You build the same deck with the same steps, from your dashboard. Then compare: what does yours say that the demo deck couldn't?</p>
-<h3>In the demo: a deck from a brief only</h3>
-<p>No attachment. Claude gets only these words, so every fact comes back as a [NEED]. Try it at home to see the difference.</p>
-<div class="prompt"><div class="ph"><span>Brief-only outline prompt (demo) <em>· Claude</em></span><button class="copy" type="button" data-for="p1">Copy</button></div><pre id="p1">You are helping Maya, owner of Corner Café, plan a short presentation.
+<section class="tab" id="demo" role="tabpanel" aria-labelledby="tb-demo" tabindex="-1">
+  <div class="th"><h2>Demo: deck from a brief</h2><span class="chip m-demo">Live demo</span><span class="chip slides">Deck slides 10–12</span></div>
+  
+<div class="cols">
+<div>
+  <div class="prompt "><div class="ph"><span>Brief-only outline prompt (demo) <em>· Claude</em></span><button class="copy" type="button" data-for="p1">Copy</button></div><pre id="p1">You are helping Maya, owner of Corner Café, plan a short presentation.
 About us: two cafés (Austin and Nashville) and an online store. We sell coffee beans, brewing gear, mugs and subscriptions.
 Maya wants her two café leads to agree a holiday plan: what to restock and promote, and whether our online discounts are too deep.
 Make an OUTLINE ONLY for a 6-slide deck. For each slide, give a title that states the message as one full sentence, and 2 or 3 short points.
 The last slide must say what Maya needs from the café leads.
 Tone: plain and friendly.
 I have not given you any numbers. Do not invent any. Write [NEED: what is missing] wherever a number or fact should go.</pre></div>
-<h3>Your turn, step 1: the outline only, from your dashboard</h3>
-<ol class="steps"><li>Start a new chat in Claude.</li><li>Click <b>+</b> and attach your Corner Café dashboard PDF (or the sample).</li><li>Copy the prompt, paste it, send.</li></ol>
-<div class="prompt"><div class="ph"><span>Outline prompt <em>· Claude</em></span><button class="copy" type="button" data-for="p2">Copy</button></div><pre id="p2">You are helping Maya, owner of Corner Café, plan a short presentation.
+</div>
+<div>
+  <div class="card">
+    <p class="k">Watch for</p>
+    <ol class="steps">
+      <li>No file attached. Claude gets only the brief.</li>
+      <li>The outline reads well, but every fact is a <b>[NEED]</b>.</li>
+      <li>Then the build prompt from <b>Your turn: build</b> turns it into a .pptx.</li>
+      <li>Count the [NEED]s. That's what a deck without your data is missing.</li>
+    </ol>
+  </div>
+  <div class="card mint"><p><b>Fix it by replying:</b> “Make slide 3's title shorter.” “Keep every [NEED]. Don't guess.”</p><p class="small">Try this prompt at home to see the difference for yourself.</p></div>
+</div>
+</div>
+</section>
+<section class="tab" id="your-outline" role="tabpanel" aria-labelledby="tb-your-outline" tabindex="-1">
+  <div class="th"><h2>Your turn: outline</h2><span class="chip m-turn">Your turn</span><span class="chip slides">Deck slide 13</span></div>
+  
+<div class="cols c-wide">
+<div>
+  <ol class="steps">
+    <li>Start a <b>new chat</b> in Claude.</li>
+    <li>Click <b>+</b> and attach your Corner Café dashboard PDF (or the sample).</li>
+    <li>Copy the prompt, paste it, send.</li>
+    <li>Run the title test. Fix at least one title by replying, for example: <i>“Make slide 3's title shorter.”</i></li>
+  </ol>
+  <div class="card mint"><p><b>Got slides instead of an outline?</b> Reply: “Outline only, please. No slides yet.”</p></div>
+</div>
+<div>
+  <div class="prompt "><div class="ph"><span>Outline prompt <em>· Claude</em></span><button class="copy" type="button" data-for="p2">Copy</button></div><pre id="p2">You are helping Maya, owner of Corner Café, plan a short presentation.
 About us: two cafés (Austin and Nashville) and an online store. We sell coffee beans, brewing gear, mugs and subscriptions.
 I attached our Session 5 dashboard (PDF). Read all of it first: the charts, tables, Fact and Guess notes, and the next steps.
 Maya wants her two café leads to agree a holiday plan: what to restock and promote, and whether our online discounts are too deep.
@@ -179,160 +321,244 @@ Say which slide each dashboard chart belongs on.
 The last slide must say what Maya needs from the café leads.
 Tone: plain and friendly.
 Use only numbers from my dashboard, and keep a Guess as a guess. If something is missing, write [NEED: what is missing] instead of guessing.</pre></div>
-<p>Run the title test. Fix at least one title by replying, for example: <i>“Move slide 5 before slide 4.”</i></p>
-<h3>Your turn, step 2: build the deck</h3>
-<div class="prompt"><div class="ph"><span>Build prompt <em>· Claude</em></span><button class="copy" type="button" data-for="p3">Copy</button></div><pre id="p3">Now build the deck from this outline as a PowerPoint file.
+</div>
+</div>
+</section>
+<section class="tab" id="your-build" role="tabpanel" aria-labelledby="tb-your-build" tabindex="-1">
+  <div class="th"><h2>Your turn: build</h2><span class="chip m-turn">Your turn</span><span class="chip slides">Deck slide 13</span></div>
+  
+<div class="cols">
+<div>
+  <div class="prompt "><div class="ph"><span>Build prompt <em>· Claude</em></span><button class="copy" type="button" data-for="p3">Copy</button></div><pre id="p3">Now build the deck from this outline as a PowerPoint file.
 - Use my slide titles exactly as written.
 - Up to 3 short points per slide. Few words.
 - Keep it simple: no speaker notes or pictures yet.
 - Keep every [NEED] tag. Do not add any number I did not give you.
 Create it as a PowerPoint (.pptx) file I can download.</pre></div>
-<ol class="steps"><li>Click the file to preview it, then <b>Download</b>.</li><li>Open it in PowerPoint, or upload it to Google Drive and open with Google Slides.</li><li>Read only the titles out loud. They should tell the plan.</li><li>Compare with the demo deck: where it had [NEED]s, yours has real numbers. Keep the file open.</li></ol>
-</section>
-
-<section id="parts">
-<h2><span class="n">5</span>Parts of a deck</h2>
-<p class="lede">Look at the deck you just built. If you can name the part, you can ask AI to change it. Which part is still empty?</p>
-<ul class="tight">
-  <li><b>Theme:</b> colors, fonts and background for the whole deck.</li>
-  <li><b>Layouts:</b> where things sit on a slide (title only, two columns, big picture).</li>
-  <li><b>Slides:</b> the pages, in order. One message each.</li>
-  <li><b>Elements:</b> what sits on a slide: title, text, chart, picture, icon, slide number.</li>
-  <li><b>Speaker notes:</b> what you'll say, under each slide. Only you see them.</li>
-</ul>
-<h3>Slide types</h3>
-<p>Title · Agenda · Section divider · Big number · Chart · Comparison · Picture · Closing ask. Name the type in your prompt: <i>“Make slide 3 a comparison slide.”</i></p>
-
-<div class="quiz" id="q-notes">
-  <h3>On the slide, or in your notes?</h3><p class="qi">Where does each piece of the Corner Café demo deck go?</p>
-  <ol><li data-a="Slide"><p>The title “Online discounts are five times deeper than in store”</p><div class="opts"><button type="button" class="opt">Slide</button><button type="button" class="opt">Notes</button></div><p class="fb" hidden data-why="The message belongs on screen."></p></li><li data-a="Notes"><p>Why sales jumped in February</p><div class="opts"><button type="button" class="opt">Slide</button><button type="button" class="opt">Notes</button></div><p class="fb" hidden data-why="Detail you say out loud."></p></li><li data-a="Slide"><p>A chart comparing the 15% and 3% discounts</p><div class="opts"><button type="button" class="opt">Slide</button><button type="button" class="opt">Notes</button></div><p class="fb" hidden data-why="A visual that proves the title."></p></li><li data-a="Notes"><p>A story about one customer's review</p><div class="opts"><button type="button" class="opt">Slide</button><button type="button" class="opt">Notes</button></div><p class="fb" hidden data-why="Tell it, and leave out the customer's name."></p></li><li data-a="Slide"><p>“Please agree to two 2-week tests”</p><div class="opts"><button type="button" class="opt">Slide</button><button type="button" class="opt">Notes</button></div><p class="fb" hidden data-why="The ask goes on the last slide."></p></li></ol>
-  <p class="score" aria-live="polite"></p>
+</div>
+<div>
+  <ol class="steps">
+    <li>Click the file to preview it, then <b>Download</b>.</li>
+    <li>Open it in PowerPoint, or upload it to Google Drive and open with Google Slides.</li>
+    <li>Read only the titles out loud. They should tell the plan.</li>
+  </ol>
+  <div class="card coral"><p><b>Compare:</b> where the demo deck had [NEED]s, yours has real numbers. What does yours say that the demo deck couldn't? Keep the file open.</p></div>
+  <div class="card"><p><b>No file?</b> Turn on file creation (Settings → Capabilities), then ask: “Create it as a PowerPoint file.”</p></div>
+</div>
 </div>
 </section>
+<section class="tab" id="parts" role="tabpanel" aria-labelledby="tb-parts" tabindex="-1">
+  <div class="th"><h2>Parts of a deck</h2><span class="chip m-quiz">Watch + quiz</span><span class="chip slides">Deck slides 14–16</span></div>
+  
+<div class="cols">
+<div>
+  <p class="lede">Look at the deck you just built. If you can name the part, you can ask AI to change it. Which part is still empty?</p>
+  <ul class="parts">
+    <li><b>Theme</b> colors, fonts and background for the whole deck</li>
+    <li><b>Layouts</b> where things sit: title only, two columns, big picture</li>
+    <li><b>Slides</b> the pages, in order, one message each</li>
+    <li><b>Elements</b> title, text, chart, picture, icon, slide number</li>
+    <li><b>Speaker notes</b> what you'll say. Only you see them</li>
+  </ul>
+  <p class="small"><b>Slide types:</b> Title · Agenda · Section · Big number · Chart · Comparison · Picture · Closing ask. Name the type in your prompt: <i>“Make slide 3 a comparison slide.”</i></p>
+</div>
+<div>
 
-<section id="modify">
-<h2><span class="n">6</span>Modify your deck in three steps</h2>
-<p class="lede">Stay in the same Claude chat. One request per step. Each step gives you a new version of the file.</p>
-<h3>Stuck on how to ask? Let AI write the prompt</h3>
-<p>Say what you want in your own words. Read the prompt Claude writes, fix anything wrong, then paste it back. Works for any step below.</p>
-<div class="prompt"><div class="ph"><span>Write-my-prompt prompt <em>· Claude</em></span><button class="copy" type="button" data-for="p4">Copy</button></div><pre id="p4">Write me a clear prompt I can paste back here to change my deck.
-What I want: [say it in your own words, for example: warmer café colors and bigger numbers on slide 2]
-Keep the prompt short.</pre></div>
-<h3>Step 1: add speaker notes</h3>
-<div class="prompt"><div class="ph"><span>Speaker notes <em>· Claude</em></span><button class="copy" type="button" data-for="p5">Copy</button></div><pre id="p5">Add speaker notes to every slide: 3 or 4 sentences Maya would say out loud to her café leads.
+<div class="quiz" id="q-notes">
+  <h3><span class="qk">Quiz</span>On the slide, or in your notes?</h3><p class="qi">Where does each piece of Maya's deck go?</p>
+  <ol><li data-a="Slide"><div class="qrow"><p class="qq">The title “Online discounts are five times deeper than in store”</p><div class="opts"><button type="button" class="opt">Slide</button><button type="button" class="opt">Notes</button></div></div><p class="fb" hidden data-why="The message belongs on screen."></p></li><li data-a="Notes"><div class="qrow"><p class="qq">Why online buyers expect a discount</p><div class="opts"><button type="button" class="opt">Slide</button><button type="button" class="opt">Notes</button></div></div><p class="fb" hidden data-why="Detail you say out loud."></p></li><li data-a="Slide"><div class="qrow"><p class="qq">A chart comparing the 15% and 3% discounts</p><div class="opts"><button type="button" class="opt">Slide</button><button type="button" class="opt">Notes</button></div></div><p class="fb" hidden data-why="A visual that proves the title."></p></li><li data-a="Notes"><div class="qrow"><p class="qq">A story about one customer's review</p><div class="opts"><button type="button" class="opt">Slide</button><button type="button" class="opt">Notes</button></div></div><p class="fb" hidden data-why="Tell it, and leave out the customer's name."></p></li><li data-a="Slide"><div class="qrow"><p class="qq">“Please agree to two 2-week tests”</p><div class="opts"><button type="button" class="opt">Slide</button><button type="button" class="opt">Notes</button></div></div><p class="fb" hidden data-why="The ask goes on the last slide."></p></li></ol>
+  <p class="score" aria-live="polite"></p>
+</div>
+</div>
+</div>
+</section>
+<section class="tab" id="modify" role="tabpanel" aria-labelledby="tb-modify" tabindex="-1">
+  <div class="th"><h2>Modify: notes, colors, chart</h2><span class="chip m-turn">Your turn</span><span class="chip slides">Deck slides 17–18</span></div>
+  
+<p class="lede">Same Claude chat. One request per step, in order. Each step gives you a new version of the file: open it each time.</p>
+<div class="three">
+  <div><div class="prompt tall"><div class="ph"><span>Step 1 · Speaker notes</span><button class="copy" type="button" data-for="p4">Copy</button></div><pre id="p4">Add speaker notes to every slide: 3 or 4 sentences Maya would say out loud to her café leads.
 Plain and friendly. Use only numbers from my dashboard.
 Keep every slide's title and points the same.
-Give me a new version of the PowerPoint file.</pre></div>
-<p>Read the notes out loud. Change any line Maya wouldn't say.</p>
-<h3>Step 2: change the theme colors</h3>
-<div class="prompt"><div class="ph"><span>Theme colors <em>· Claude</em></span><button class="copy" type="button" data-for="p6">Copy</button></div><pre id="p6">Change the theme of my whole deck:
+Give me a new version of the PowerPoint file.</pre></div><p class="small">Read the notes out loud. Change any line Maya wouldn't say.</p></div>
+  <div><div class="prompt tall"><div class="ph"><span>Step 2 · Theme colors</span><button class="copy" type="button" data-for="p5">Copy</button></div><pre id="p5">Change the theme of my whole deck:
 warm café colors (dark brown, cream and one orange accent), large clear titles.
 Keep every slide's words and speaker notes the same.
-Give me a new version of the PowerPoint file.</pre></div>
-<h3>Step 3: add a chart and an icon</h3>
-<p>Claude can't lift a chart out of a PDF, so it redraws one from the dashboard's numbers. You get a real chart you can edit in PowerPoint.</p>
-<div class="prompt"><div class="ph"><span>Chart and icon <em>· Claude</em></span><button class="copy" type="button" data-for="p7">Copy</button></div><pre id="p7">On the slide about what sells, add a bar chart of net sales by category, highest to lowest.
+Give me a new version of the PowerPoint file.</pre></div><p class="small">The whole deck changes at once.</p></div>
+  <div><div class="prompt tall"><div class="ph"><span>Step 3 · Chart and icon</span><button class="copy" type="button" data-for="p6">Copy</button></div><pre id="p6">On the slide about what sells, add a bar chart of net sales by category, highest to lowest.
 Use the exact numbers in my dashboard. Label each bar with its number and start the bars at zero.
 On the title slide, add a simple coffee cup icon.
 Keep all other slides the same.
-Give me a new version of the PowerPoint file.</pre></div>
-<p>Claude draws charts and simple icons. For a <b>photo</b>, use Google Slides: <b>Insert → Image → Search the web</b>.</p>
-<p><b>One slide only?</b> Name it, and say what stays: <i>“Change only slide 3. Keep all other slides exactly as they are.”</i></p>
-</section>
-
-<section id="check">
-<h2><span class="n">7</span>Check it before Maya presents</h2>
-<p class="lede">Notes and charts can bring in new numbers. Check after you modify.</p>
-<div class="prompt"><div class="ph"><span>Check prompt <em>· Claude</em></span><button class="copy" type="button" data-for="p8">Copy</button></div><pre id="p8">List every number on the slides and in the speaker notes.
-Next to each one, say where in my dashboard it came from.
-If it did not come from my dashboard, say so.</pre></div>
-<div class="card">
-<p><b>Five checks before you present</b></p>
-<ol class="tight">
-  <li><b>Facts:</b> every number matches the dashboard. (Whole bean coffee: $2,858.55.)</li>
-  <li><b>Gaps:</b> no [NEED] left on a slide.</li>
-  <li><b>Story:</b> read only the titles. They tell the plan.</li>
-  <li><b>Notes:</b> you'd say every line out loud.</li>
-  <li><b>Clarity:</b> one message per slide. Readable from the back.</li>
-</ol>
+Give me a new version of the PowerPoint file.</pre></div><p class="small">Claude can't lift a chart out of a PDF, so it redraws one from the dashboard's numbers. For a photo, use Google Slides.</p></div>
+</div>
+<div class="cols">
+  <div><div class="prompt "><div class="ph"><span>Stuck on how to ask? Let AI write the prompt <em>· Claude</em></span><button class="copy" type="button" data-for="p7">Copy</button></div><pre id="p7">Write me a clear prompt I can paste back here to change my deck.
+What I want: [say it in your own words, for example: warmer café colors and bigger numbers on slide 2]
+Keep the prompt short.</pre></div></div>
+  <div class="card"><p><b>One slide only?</b> Name it, and say what stays: <i>“Change only slide 3. Keep all other slides exactly as they are.”</i></p><p class="small">Near your free limit? Combine steps 2 and 3 into one request.</p></div>
 </div>
 </section>
-
-<section id="canvas">
-<h2><span class="n">8</span>Gemini Canvas → Google Slides</h2>
-<ol class="steps">
-  <li>Open <a href="https://gemini.google.com">gemini.google.com</a>. In the prompt bar, open <b>Tools</b> and pick <b>Canvas</b>.</li>
-  <li>Copy the prompt below. Replace the last line with your fixed outline from Claude. Send.</li>
-  <li>Ask for one change in the chat, for example warmer colors.</li>
-  <li>Click <b>Share &amp; export → Export to Slides</b>. Your deck opens in Google Slides.</li>
-</ol>
-<div class="prompt"><div class="ph"><span>Canvas prompt <em>· Gemini Canvas</em></span><button class="copy" type="button" data-for="p9">Copy</button></div><pre id="p9">Create a 6-slide presentation from this outline.
+<section class="tab" id="check" role="tabpanel" aria-labelledby="tb-check" tabindex="-1">
+  <div class="th"><h2>Check it</h2><span class="chip m-turn">Your turn</span><span class="chip slides">Deck slide 19</span></div>
+  
+<div class="cols">
+<div>
+  <p class="lede">Notes and charts can bring in new numbers. Check after you modify.</p>
+  <div class="prompt "><div class="ph"><span>Check prompt <em>· Claude</em></span><button class="copy" type="button" data-for="p8">Copy</button></div><pre id="p8">List every number on the slides and in the speaker notes.
+Next to each one, say where in my dashboard it came from.
+If it did not come from my dashboard, say so.</pre></div>
+  <p class="small">Then check Claude's list against your dashboard yourself. AI's list is a starting point, not proof.</p>
+</div>
+<div>
+  <p class="k">Five checks before Maya presents</p>
+  <ul class="checks"><li><input type="checkbox" id="c5"><label for="c5"><b>Facts:</b> every number matches the dashboard. On the sample, whole bean coffee is $2,858.55.</label></li><li><input type="checkbox" id="c6"><label for="c6"><b>Gaps:</b> no [NEED] left on a slide. Fill it or cut the line.</label></li><li><input type="checkbox" id="c7"><label for="c7"><b>Story:</b> read only the titles. They tell the plan.</label></li><li><input type="checkbox" id="c8"><label for="c8"><b>Notes:</b> you'd say every line out loud.</label></li><li><input type="checkbox" id="c9"><label for="c9"><b>Clarity:</b> one message per slide. Readable from the back.</label></li></ul>
+</div>
+</div>
+</section>
+<section class="tab" id="canvas" role="tabpanel" aria-labelledby="tb-canvas" tabindex="-1">
+  <div class="th"><h2>Gemini Canvas → Slides</h2><span class="chip m-turn">Your turn</span><span class="chip slides">Deck slides 20–21</span></div>
+  
+<div class="cols">
+<div>
+  <ol class="steps">
+    <li>Open <a href="https://gemini.google.com" target="_blank" rel="noopener">gemini.google.com</a>. In the prompt bar, open <b>Tools</b> and pick <b>Canvas</b>.</li>
+    <li>Copy the prompt. Replace the last line with your fixed outline from Claude. Send.</li>
+    <li>Ask for one change in the chat, for example warmer colors.</li>
+    <li>Click <b>Share &amp; export → Export to Slides</b>.</li>
+  </ol>
+  <div class="prompt "><div class="ph"><span>Canvas prompt <em>· Gemini Canvas</em></span><button class="copy" type="button" data-for="p9">Copy</button></div><pre id="p9">Create a 6-slide presentation from this outline.
 Keep my slide titles exactly. Add speaker notes to each slide.
 Use a warm, simple café style.
 Do not add any number that is not in my outline. Keep every [NEED] tag.
 
 [paste your fixed outline here]</pre></div>
-<h3>Finish in Google Slides</h3>
-<ol class="steps">
-  <li><b>Theme:</b> Slide → Change theme. Every slide follows.</li>
-  <li><b>Photo:</b> Insert → Image → Search the web. Try “coffee shop” for the title slide.</li>
-  <li><b>Notes:</b> View → Show speaker notes. Missing? Paste them from Claude.</li>
-  <li><b>Practice:</b> Slideshow → Presenter view. You see your notes; the room sees the slides.</li>
-</ol>
+</div>
+<div>
+  <p class="k">Finish in Google Slides</p>
+  <ul class="checks"><li><input type="checkbox" id="c10"><label for="c10"><b>Theme:</b> Slide → Change theme. Every slide follows.</label></li><li><input type="checkbox" id="c11"><label for="c11"><b>Photo:</b> Insert → Image → Search the web. Try “coffee shop” for the title slide.</label></li><li><input type="checkbox" id="c12"><label for="c12"><b>Notes:</b> View → Show speaker notes. Missing? Paste them from Claude.</label></li><li><input type="checkbox" id="c13"><label for="c13"><b>Practice:</b> Slideshow → Presenter view. You see your notes; the room sees the slides.</label></li></ul>
+  <p class="small">Can't find Canvas? Start your message with “Create a presentation in Canvas.”</p>
+</div>
+</div>
 </section>
-
-<section id="tools">
-<h2><span class="n">9</span>Gamma, NotebookLM, Canva</h2>
+<section class="tab" id="tools" role="tabpanel" aria-labelledby="tb-tools" tabindex="-1">
+  <div class="th"><h2>Gamma, NotebookLM, Canva</h2><span class="chip m-watch">Watch</span><span class="chip slides">Deck slide 22</span></div>
+  
 <p class="lede">Watch Gamma and NotebookLM in class. Try all three at home with your fixed outline.</p>
-<div class="tools">
-  <div class="card"><span class="tag c">Demo</span><h3>Gamma</h3><p><a href="https://gamma.app">gamma.app</a> → Create new → Paste in text → paste your outline → Generate → pick a theme.</p><p>Free plan: credits for about 10 decks, a Gamma badge on exports. Exports PDF, PowerPoint, Google Slides.</p></div>
-  <div class="card"><span class="tag c">Demo</span><h3>NotebookLM</h3><p><a href="https://notebooklm.google.com">notebooklm.google.com</a> → New notebook → add the dashboard PDF as a source → Studio → Slide Deck.</p><p>Free. The slides are pictures: you can't edit the text, only regenerate. Download as PDF.</p></div>
-  <div class="card"><span class="tag">Try at home</span><h3>Canva</h3><p><a href="https://www.canva.com">canva.com</a> → Create a design → Presentation → describe it or paste your outline → generate.</p><p>For confident users. Free with limits. Exports PowerPoint or PDF.</p></div>
+<div class="three">
+  <div class="card"><span class="tag c">Demo</span><h3>Gamma</h3><p><a href="https://gamma.app" target="_blank" rel="noopener">gamma.app</a> → Create new → Paste in text → paste your outline → Generate → pick a theme.</p><p class="small">Free plan: credits for about 10 decks, a Gamma badge on exports. Exports PDF, PowerPoint, Google Slides.</p></div>
+  <div class="card"><span class="tag c">Demo</span><h3>NotebookLM</h3><p><a href="https://notebooklm.google.com" target="_blank" rel="noopener">notebooklm.google.com</a> → New notebook → add the dashboard PDF as a source → Studio → Slide Deck.</p><p class="small">Free. The slides are pictures: you can't edit the text, only regenerate. Download as PDF.</p></div>
+  <div class="card"><span class="tag">Try at home</span><h3>Canva</h3><p><a href="https://www.canva.com" target="_blank" rel="noopener">canva.com</a> → Create a design → Presentation → describe it or paste your outline → generate.</p><p class="small">For confident users. Free with limits. Exports PowerPoint or PDF.</p></div>
 </div>
-<p class="lede">These tools change often. If a menu looks different, look for the same words nearby.</p>
+<p class="small">These tools change often. If a menu looks different, look for the same words nearby.</p>
 </section>
-
-<section id="wrap">
-<h2><span class="n">10</span>Wrap up</h2>
-<div class="card mint">
-<p><b>Exit ticket</b></p>
-<p>The next deck I'll make with AI is ______________.<br>Its job is: Ask / Teach / Report / Plan / Rally.<br>I'll start with Claude / Gemini because ______________.</p>
+<section class="tab" id="wrap" role="tabpanel" aria-labelledby="tb-wrap" tabindex="-1">
+  <div class="th"><h2>Wrap up</h2><span class="chip m-wrap">Pair share</span><span class="chip slides">Deck slides 23–25</span></div>
+  
+<div class="cols">
+<div>
+  <div class="card mint">
+    <p class="k">Exit ticket</p>
+    <label class="fill">The next deck I'll make with AI is <input type="text" aria-label="The next deck I'll make with AI"></label>
+    <p class="fill">Its job is: <button type="button" class="opt pick">Ask</button><button type="button" class="opt pick">Teach</button><button type="button" class="opt pick">Report</button><button type="button" class="opt pick">Plan</button><button type="button" class="opt pick">Rally</button></p>
+    <label class="fill">I'll start with Claude / Gemini because <input type="text" aria-label="Why that tool"></label>
+  </div>
+  <p class="small">Pair share: show your partner your title slide and your last slide. Say one thing you changed, and why.</p>
 </div>
-<h3>This week: one real deck</h3>
-<ol class="steps">
-  <li><b>Purpose:</b> pick a real deck and name its job.</li>
-  <li><b>Outline:</b> outline first, message titles, [NEED] rule.</li>
-  <li><b>Build and modify:</b> a simple deck first, then notes, theme and an image.</li>
-  <li><b>Check:</b> the five checks. Then present it once, out loud.</li>
-</ol>
-<p>Keep private details out of AI: use placeholders, then add real details yourself.</p>
-<p><b>Bring:</b> your deck, and one slide where AI fell short.</p>
+<div>
+  <p class="k">This week: one real deck</p>
+  <ol class="steps">
+    <li><b>Purpose:</b> pick a real deck and name its job.</li>
+    <li><b>Outline:</b> outline first, message titles, [NEED] rule.</li>
+    <li><b>Build and modify:</b> a simple deck first, then notes, theme and a chart.</li>
+    <li><b>Check:</b> the five checks. Then present it once, out loud.</li>
+  </ol>
+  <p class="small">Keep private details out of AI: use placeholders, then add real details yourself.</p>
+  <div class="card coral"><p><b>Bring:</b> your deck, and one slide where AI fell short.</p></div>
+</div>
+</div>
 </section>
-
-<section id="stuck">
-<h2><span class="n">?</span>Stuck?</h2>
-<details><summary>Claude didn't give me a file</summary><p>Turn on file creation in Settings → Capabilities, then ask again: “Create it as a PowerPoint file.” Or ask for the slide text and notes and paste them into Google Slides.</p></details>
-<details><summary>Claude built the slides when I asked for the outline</summary><p>Reply: “Outline only, please. No slides yet.”</p></details>
-<details><summary>I hit Claude's free limit</summary><p>Switch to Gemini Canvas with your outline. ChatGPT also takes the same prompts; ask it for a PowerPoint file.</p></details>
-<details><summary>Claude changed slides I didn't ask about</summary><p>Reply: “Keep all other slides exactly as they were. Change only slide 3.”</p></details>
-<details><summary>I can't find Canvas in Gemini</summary><p>Look for Tools in the prompt bar, or start your message with “Create a presentation in Canvas.”</p></details>
-<details><summary>My speaker notes didn't come across to Google Slides</summary><p>View → Show speaker notes, then paste each slide's notes from Claude.</p></details>
-</section>
-
-<footer>Southwest AI · AI Made Practical · Session 7. Corner Café, its owner and all numbers are made up for practice.</footer>
-</main>
+      <footer class="foot">Southwest AI · AI Made Practical · Session 7. Corner Café, its owner and all numbers are made up for practice.</footer>
+    </div>
+    <div class="nav"><button type="button" class="prev">← Back</button><span class="keys">← → keys also work</span><button type="button" class="next">Next →</button></div>
+  </main>
+</div>
+<div class="drawer" id="stuck" role="dialog" aria-modal="true" aria-labelledby="stuck-h" hidden>
+  <div class="in">
+    <div class="dh"><h2 id="stuck-h">Stuck?</h2><button type="button" class="x">Close</button></div>
+    <details><summary>Claude didn't give me a file</summary><p>Turn on file creation in Settings → Capabilities (newer Settings: Create and edit files), then ask again: “Create it as a PowerPoint file.” Or ask for the slide text and notes and paste them into Google Slides.</p></details><details><summary>Claude built the slides when I asked for the outline</summary><p>Reply: “Outline only, please. No slides yet.”</p></details><details><summary>I hit Claude's free limit</summary><p>Switch to Gemini Canvas with your outline. ChatGPT also takes the same prompts; ask it for a PowerPoint file.</p></details><details><summary>Claude changed slides I didn't ask about</summary><p>Reply: “Keep all other slides exactly as they were. Change only slide 3.”</p></details><details><summary>I can't find Canvas in Gemini</summary><p>Look for Tools in the prompt bar, or start your message with “Create a presentation in Canvas.”</p></details><details><summary>My speaker notes didn't come across to Google Slides</summary><p>View → Show speaker notes, then paste each slide's notes from Claude.</p></details><details><summary>I don't have a dashboard</summary><p>Download the sample on the first tab, Before you start.</p></details>
+  </div>
+</div>
 <script>
 (function(){
   document.documentElement.classList.add('js');
+  var KEY='s7-done', done={};
+  try{done=JSON.parse(localStorage.getItem(KEY)||'{}')||{};}catch(e){done={};}
+  function save(){try{localStorage.setItem(KEY,JSON.stringify(done));}catch(e){}}
+  var tabs=[].slice.call(document.querySelectorAll('nav.rail [role=tab]'));
+  var panels=tabs.map(function(t){return document.getElementById(t.getAttribute('aria-controls'));});
+  var prev=document.querySelector('.nav .prev'), next=document.querySelector('.nav .next');
+  var bar=document.querySelector('.prog i'), count=document.querySelector('.count'), scroller=document.querySelector('.panels');
+  var cur=0;
+  function label(i){return tabs[i].querySelector('.lbl').firstChild.textContent;}
+  function paintDone(){tabs.forEach(function(t){t.classList.toggle('done',!!done[t.getAttribute('aria-controls')]);});}
+  function show(i,focus){
+    if(i<0||i>=tabs.length)return;
+    cur=i;
+    tabs.forEach(function(t,k){var on=k===i;t.setAttribute('aria-selected',on);t.tabIndex=on?0:-1;panels[k].hidden=!on;});
+    bar.style.width=((i+1)/tabs.length*100)+'%';
+    count.textContent='Step '+(i+1)+' of '+tabs.length;
+    prev.disabled=i===0;
+    next.textContent=i===tabs.length-1?'Finish ✓':'Next: '+label(i+1)+' →';
+    try{history.replaceState(null,'','#'+panels[i].id);}catch(e){}
+    if(scroller.scrollTop)scroller.scrollTop=0;
+    if(window.innerWidth<=900){window.scrollTo(0,0);tabs[i].scrollIntoView({block:'nearest',inline:'center'});}
+    if(focus)panels[i].focus({preventScroll:true});
+  }
+  tabs.forEach(function(t,i){
+    t.addEventListener('click',function(){show(i,false);});
+    t.addEventListener('keydown',function(e){
+      var k=e.key, j=-1;
+      if(k==='ArrowDown'||k==='ArrowRight')j=(i+1)%tabs.length;
+      else if(k==='ArrowUp'||k==='ArrowLeft')j=(i-1+tabs.length)%tabs.length;
+      else if(k==='Home')j=0;else if(k==='End')j=tabs.length-1;
+      if(j>=0){e.preventDefault();e.stopPropagation();show(j,false);tabs[j].focus();}
+    });
+  });
+  prev.addEventListener('click',function(){show(cur-1,true);});
+  next.addEventListener('click',function(){done[panels[cur].id]=1;save();paintDone();if(cur<tabs.length-1)show(cur+1,true);});
+  var drawer=document.getElementById('stuck'), help=document.querySelector('.help'), last=null;
+  function openHelp(){last=document.activeElement;drawer.hidden=false;drawer.querySelector('.x').focus();}
+  function closeHelp(){drawer.hidden=true;if(last&&last.focus)last.focus();}
+  help.addEventListener('click',openHelp);
+  drawer.querySelector('.x').addEventListener('click',closeHelp);
+  drawer.addEventListener('click',function(e){if(e.target===drawer)closeHelp();});
+  document.addEventListener('keydown',function(e){
+    if(!drawer.hidden){if(e.key==='Escape')closeHelp();return;}
+    var tg=e.target, tag=tg&&tg.tagName;
+    if(tag==='INPUT'||tag==='TEXTAREA'||tag==='SELECT'||(tg&&tg.isContentEditable)||(tg&&tg.getAttribute&&tg.getAttribute('role')==='tab'))return;
+    if(e.altKey||e.ctrlKey||e.metaKey)return;
+    if(e.key==='ArrowRight'){show(cur+1,true);}else if(e.key==='ArrowLeft'){show(cur-1,true);}
+  });
+  var alias={build:'demo',stuck:null};
+  function fromHash(){
+    var h=(location.hash||'').slice(1);
+    if(h==='stuck'){openHelp();return;}
+    if(alias[h])h=alias[h];
+    for(var k=0;k<panels.length;k++){if(panels[k].id===h){show(k,false);return;}}
+    show(0,false);
+  }
+  window.addEventListener('hashchange',fromHash);
+  paintDone(); fromHash();
+
   function copyText(t, btn){
     function ok(){btn.textContent='Copied';btn.classList.add('done');setTimeout(function(){btn.textContent='Copy';btn.classList.remove('done');},1800);}
     function fallback(){var ta=document.createElement('textarea');ta.value=t;ta.setAttribute('readonly','');ta.style.position='fixed';ta.style.top='-1000px';document.body.appendChild(ta);ta.select();var good=false;try{good=document.execCommand('copy');}catch(e){}document.body.removeChild(ta);if(good)ok();else{var r=document.createRange();r.selectNodeContents(document.getElementById(btn.getAttribute('data-for')));var s=window.getSelection();s.removeAllRanges();s.addRange(r);btn.textContent='Selected';}}
     try{if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(t).then(ok,fallback);}else fallback();}catch(e){fallback();}
   }
   document.querySelectorAll('.copy').forEach(function(b){b.addEventListener('click',function(){copyText(document.getElementById(b.getAttribute('data-for')).textContent,b);});});
-  document.querySelectorAll('.quiz').forEach(function(q){
+  document.querySelectorAll('div.quiz').forEach(function(q){
     var items=q.querySelectorAll('li'),score=q.querySelector('.score');
-    function upd(){var done=q.querySelectorAll('li.answered').length,right=q.querySelectorAll('li.got').length;score.textContent=done===items.length?('You got '+right+' of '+items.length+' on the first try.'):'';}
+    function upd(){var d=q.querySelectorAll('li.answered').length,r=q.querySelectorAll('li.got').length;score.textContent=d===items.length?('You got '+r+' of '+items.length+' on the first try.'):'';}
     items.forEach(function(li){
       var fb=li.querySelector('.fb'),first=true;
       li.querySelectorAll('.opt').forEach(function(o){o.addEventListener('click',function(){
@@ -344,6 +570,7 @@ Do not add any number that is not in my outline. Keep every [NEED] tag.
       });});
     });
   });
+  document.querySelectorAll('.pick').forEach(function(b){b.addEventListener('click',function(){b.parentNode.querySelectorAll('.pick').forEach(function(x){x.classList.toggle('on',x===b);});});});
 })();
 </script>
 </body>
