@@ -385,7 +385,6 @@ Create it as a PowerPoint (.pptx) file I can download.</pre></div>
   <div class="th"><h2>Modify: notes, colors, chart</h2><span class="chip m-turn">Your turn</span><span class="chip slides">Deck slides 17–18</span></div>
   
 <p class="lede">Same Claude chat. One request per step, in order. Each step gives you a new version of the file: open it each time.</p>
-<div class="card coral"><p><b>On Claude's free plan?</b> Do steps 2 and 3 as one request, so you don't run out partway through. If Claude says you've hit a limit, finish in Gemini Canvas (step 11).</p></div>
 <div class="three">
   <div><div class="prompt tall"><div class="ph"><span>Step 1 · Speaker notes</span><button class="copy" type="button" data-for="p4">Copy</button></div><pre id="p4">Add speaker notes to every slide: 3 or 4 sentences Maya would say out loud to her café leads.
 Plain and friendly. Use only numbers from my dashboard.
@@ -405,7 +404,7 @@ Give me a new version of the PowerPoint file.</pre></div><p class="small">Claude
   <div><div class="prompt "><div class="ph"><span>Stuck on how to ask? Let AI write the prompt <em>· Claude</em></span><button class="copy" type="button" data-for="p7">Copy</button></div><pre id="p7">Write me a clear prompt I can paste back here to change my deck.
 What I want: [say it in your own words, for example: warmer café colors and bigger numbers on slide 2]
 Keep the prompt short.</pre></div></div>
-  <div class="card"><p><b>One slide only?</b> Name it, and say what stays: <i>“Change only slide 3. Keep all other slides exactly as they are.”</i></p></div>
+  <div class="card"><p><b>One slide only?</b> Name it, and say what stays: <i>“Change only slide 3. Keep all other slides exactly as they are.”</i></p><p class="small">Near your free limit? Combine steps 2 and 3 into one request.</p></div>
 </div>
 </section>
 <section class="tab" id="check" role="tabpanel" aria-labelledby="tb-check" tabindex="-1">
@@ -421,7 +420,7 @@ If it did not come from my dashboard, say so.</pre></div>
 </div>
 <div>
   <p class="k">Five checks before Maya presents</p>
-  <ul class="checks"><li><input type="checkbox" id="c5"><label for="c5"><b>Facts:</b> every number matches the dashboard. On the sample, whole bean coffee is $2,858.55 and the online discount is 15.0%.</label></li><li><input type="checkbox" id="c6"><label for="c6"><b>Gaps:</b> no [NEED] left on a slide. Fill it or cut the line.</label></li><li><input type="checkbox" id="c7"><label for="c7"><b>Story:</b> read only the titles. They tell the plan.</label></li><li><input type="checkbox" id="c8"><label for="c8"><b>Notes:</b> you'd say every line out loud.</label></li><li><input type="checkbox" id="c9"><label for="c9"><b>Clarity:</b> one message per slide. Readable from the back.</label></li></ul>
+  <ul class="checks"><li><input type="checkbox" id="c5"><label for="c5"><b>Facts:</b> every number matches the dashboard. On the sample, whole bean coffee is $2,858.55.</label></li><li><input type="checkbox" id="c6"><label for="c6"><b>Gaps:</b> no [NEED] left on a slide. Fill it or cut the line.</label></li><li><input type="checkbox" id="c7"><label for="c7"><b>Story:</b> read only the titles. They tell the plan.</label></li><li><input type="checkbox" id="c8"><label for="c8"><b>Notes:</b> you'd say every line out loud.</label></li><li><input type="checkbox" id="c9"><label for="c9"><b>Clarity:</b> one message per slide. Readable from the back.</label></li></ul>
 </div>
 </div>
 </section>
@@ -462,17 +461,15 @@ Do not add any number that is not in my outline. Keep every [NEED] tag.
 <p class="small">These tools change often. If a menu looks different, look for the same words nearby.</p>
 </section>
 <section class="tab" id="wrap" role="tabpanel" aria-labelledby="tb-wrap" tabindex="-1">
-  <div class="th"><h2>Wrap up</h2><span class="chip m-wrap">Pair share</span><span class="chip slides">Deck slides 23–26</span></div>
+  <div class="th"><h2>Wrap up</h2><span class="chip m-wrap">Pair share</span><span class="chip slides">Deck slides 23–25</span></div>
   
 <div class="cols">
 <div>
   <div class="card mint">
     <p class="k">Exit ticket</p>
-    <label class="fill">The next deck I'll make with AI is <input type="text" id="ex1" data-save="ex1" aria-label="The next deck I'll make with AI"></label>
-    <p class="fill" id="exjob">Its job is: <button type="button" class="opt pick">Ask</button><button type="button" class="opt pick">Teach</button><button type="button" class="opt pick">Report</button><button type="button" class="opt pick">Plan</button><button type="button" class="opt pick">Rally</button></p>
-    <label class="fill">I'll start with Claude / Gemini because <input type="text" id="ex3" data-save="ex3" aria-label="Why that tool"></label>
-    <p><button type="button" class="copy" id="copy-exit" data-label="Copy my exit ticket">Copy my exit ticket</button></p>
-    <p class="small">Your answers stay on this device.</p>
+    <label class="fill">The next deck I'll make with AI is <input type="text" aria-label="The next deck I'll make with AI"></label>
+    <p class="fill">Its job is: <button type="button" class="opt pick">Ask</button><button type="button" class="opt pick">Teach</button><button type="button" class="opt pick">Report</button><button type="button" class="opt pick">Plan</button><button type="button" class="opt pick">Rally</button></p>
+    <label class="fill">I'll start with Claude / Gemini because <input type="text" aria-label="Why that tool"></label>
   </div>
   <p class="small">Pair share: show your partner your title slide and your last slide. Say one thing you changed, and why.</p>
 </div>
@@ -563,11 +560,11 @@ Do not add any number that is not in my outline. Keep every [NEED] tag.
   paintDone(); fromHash();
 
   function copyText(t, btn){
-    function ok(){btn.textContent='Copied';btn.classList.add('done');setTimeout(function(){btn.textContent=btn.getAttribute('data-label')||'Copy';btn.classList.remove('done');},1800);}
-    function fallback(){var ta=document.createElement('textarea');ta.value=t;ta.setAttribute('readonly','');ta.style.position='fixed';ta.style.top='-1000px';document.body.appendChild(ta);ta.select();var good=false;try{good=document.execCommand('copy');}catch(e){}document.body.removeChild(ta);if(good)ok();else if(btn.getAttribute('data-for')){var r=document.createRange();r.selectNodeContents(document.getElementById(btn.getAttribute('data-for')));var s=window.getSelection();s.removeAllRanges();s.addRange(r);btn.textContent='Selected';}}
+    function ok(){btn.textContent='Copied';btn.classList.add('done');setTimeout(function(){btn.textContent='Copy';btn.classList.remove('done');},1800);}
+    function fallback(){var ta=document.createElement('textarea');ta.value=t;ta.setAttribute('readonly','');ta.style.position='fixed';ta.style.top='-1000px';document.body.appendChild(ta);ta.select();var good=false;try{good=document.execCommand('copy');}catch(e){}document.body.removeChild(ta);if(good)ok();else{var r=document.createRange();r.selectNodeContents(document.getElementById(btn.getAttribute('data-for')));var s=window.getSelection();s.removeAllRanges();s.addRange(r);btn.textContent='Selected';}}
     try{if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(t).then(ok,fallback);}else fallback();}catch(e){fallback();}
   }
-  document.querySelectorAll('.copy[data-for]').forEach(function(b){b.addEventListener('click',function(){copyText(document.getElementById(b.getAttribute('data-for')).textContent,b);});});
+  document.querySelectorAll('.copy').forEach(function(b){b.addEventListener('click',function(){copyText(document.getElementById(b.getAttribute('data-for')).textContent,b);});});
   document.querySelectorAll('div.quiz').forEach(function(q){
     var items=q.querySelectorAll('li'),score=q.querySelector('.score');
     function upd(){var d=q.querySelectorAll('li.answered').length,r=q.querySelectorAll('li.got').length;score.textContent=d===items.length?('You got '+r+' of '+items.length+' on the first try.'):'';}
@@ -582,20 +579,7 @@ Do not add any number that is not in my outline. Keep every [NEED] tag.
       });});
     });
   });
-  function sget(k){try{return localStorage.getItem('s7-'+k);}catch(e){return null;}}
-  function sset(k,v){try{localStorage.setItem('s7-'+k,v);}catch(e){}}
-  document.querySelectorAll('[data-save]').forEach(function(inp){var v=sget(inp.getAttribute('data-save'));if(v)inp.value=v;inp.addEventListener('input',function(){sset(inp.getAttribute('data-save'),inp.value);});});
-  var savedJob=sget('exjob');
-  document.querySelectorAll('.pick').forEach(function(b){
-    if(b.textContent===savedJob)b.classList.add('on');
-    b.addEventListener('click',function(){b.parentNode.querySelectorAll('.pick').forEach(function(x){x.classList.toggle('on',x===b);});sset('exjob',b.textContent);});
-  });
-  var ce=document.getElementById('copy-exit');
-  if(ce)ce.addEventListener('click',function(){
-    var j=document.querySelector('#exjob .pick.on');
-    var t='Session 7 exit ticket\nThe next deck I\'ll make with AI is: '+(document.getElementById('ex1').value||'___')+'\nIts job is: '+(j?j.textContent:'___')+'\nI\'ll start with Claude / Gemini because: '+(document.getElementById('ex3').value||'___');
-    copyText(t,ce);
-  });
+  document.querySelectorAll('.pick').forEach(function(b){b.addEventListener('click',function(){b.parentNode.querySelectorAll('.pick').forEach(function(x){x.classList.toggle('on',x===b);});});});
 })();
 </script>
 </body>
